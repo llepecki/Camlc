@@ -9,11 +9,11 @@ namespace ReversePolishNotationWebCalc.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CalcController : ControllerBase
+    public class CalculateController : ControllerBase
     {
         private readonly ICalc _calc;
 
-        public CalcController(ICalc calc)
+        public CalculateController(ICalc calc)
         {
             if (calc == null)
             {
