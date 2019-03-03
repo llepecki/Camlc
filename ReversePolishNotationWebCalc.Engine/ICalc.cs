@@ -2,7 +2,8 @@
 
 namespace ReversePolishNotationWebCalc.Engine
 {
-    public class Class1
+    public interface ICalc
     {
+        double Calculate(string expr);
     }
 }
