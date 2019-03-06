@@ -1,6 +1,7 @@
+using System;
 using System.Collections.Generic;
 
-namespace ReversePolishNotationWebCalc.Engine
+namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine
 {
     public class OperandToken : Token
     {
@@ -11,8 +12,13 @@ namespace ReversePolishNotationWebCalc.Engine
             _value = value;
         }
 
-        public override void PutOrCalculate(Stack<double> stack)
+        public override void PushOrCalculate(Stack<double> stack)
         {
+            if (stack == null)
+            {
+                throw new ArgumentNullException(nameof(stack));
+            }
+            
             stack.Push(_value);
         }
     }

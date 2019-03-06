@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace ReversePolishNotationWebCalc.Engine
+namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine
 {
     public class RpnCalc : ICalc
     {
@@ -9,12 +9,7 @@ namespace ReversePolishNotationWebCalc.Engine
 
         public RpnCalc(IToRpnConverter toRpnConverter)
         {
-            if (toRpnConverter == null)
-            {
-                throw new ArgumentNullException(nameof(toRpnConverter));
-            }
-
-            _toRpnConverter = toRpnConverter;
+            _toRpnConverter = toRpnConverter ?? throw new ArgumentNullException(nameof(toRpnConverter));
         }
 
         public double Calculate(string expr)
@@ -25,7 +20,7 @@ namespace ReversePolishNotationWebCalc.Engine
 
             foreach (Token token in rpnExpr)
             {
-                token.PutOrCalculate(stack);
+                token.PushOrCalculate(stack);
             }
 
             return stack.Pop();

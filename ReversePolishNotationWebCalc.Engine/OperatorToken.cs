@@ -1,15 +1,21 @@
+using System;
 using System.Collections.Generic;
 
-namespace ReversePolishNotationWebCalc.Engine
+namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine
 {
     public abstract class OperatorToken : Token
     {
-        public abstract int ArgCount { get; }
+        protected abstract int ArgCount { get; }
 
-        public abstract double Calculate(double[] args);
+        protected abstract double Calculate(double[] args);
 
-        public override void PutOrCalculate(Stack<double> stack)
+        public override void PushOrCalculate(Stack<double> stack)
         {
+            if (stack == null)
+            {
+                throw new ArgumentNullException(nameof(stack));
+            }
+            
             double[] args = new double[ArgCount];
 
             for (int i = 0; i < ArgCount; i++)

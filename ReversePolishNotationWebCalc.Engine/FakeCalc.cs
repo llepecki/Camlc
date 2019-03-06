@@ -1,9 +1,10 @@
-using ReversePolishNotationWebCalc.Engine;
-
-public class FakeCalc : ICalc
+namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine
 {
-    public double Calculate(string expr)
+    public class FakeCalc : ICalc
     {
-        return 42;
+        public double Calculate(string expr)
+        {
+            return 42;
+        }
     }
 }

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ReversePolishNotationWebCalc.Engine
+﻿namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine
 {
     public interface ICalc
     {

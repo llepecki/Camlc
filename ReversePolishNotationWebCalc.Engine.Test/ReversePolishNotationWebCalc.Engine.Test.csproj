@@ -1,9 +1,13 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
 
     <IsPackable>false</IsPackable>
+
+    <AssemblyName>Lepecki.Playground.ReversePolishNotationWebCalc.Engine.Test</AssemblyName>
+
+    <RootNamespace>Lepecki.Playground.ReversePolishNotationWebCalc.Engine.Test</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

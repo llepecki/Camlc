@@ -1,25 +1,32 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
-namespace ReversePolishNotationWebCalc.Engine
+namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine
 {
     public class RpnExpr : IEnumerable<Token>
     {
-        private readonly IList<Token> _tokens = new List<Token>();
+        private readonly Token[] _tokens;
 
-        public void Add(Token token)
+        public RpnExpr(IEnumerable<Token> tokens)
         {
-            _tokens.Add(token);
+            if (tokens == null)
+            {
+                throw new ArgumentNullException(nameof(tokens));
+            }
+
+            _tokens = tokens.ToArray();
         }
 
         public IEnumerator<Token> GetEnumerator()
         {
-            return _tokens.GetEnumerator();
+            return _tokens.AsEnumerable().GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return this.GetEnumerator();
+            return GetEnumerator();
         }
     }
 }

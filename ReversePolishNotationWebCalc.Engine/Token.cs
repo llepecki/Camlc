@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 
-namespace ReversePolishNotationWebCalc.Engine
+namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine
 {
     public abstract class Token
     {
-        public abstract void PutOrCalculate(Stack<double> stack);
+        public abstract void PushOrCalculate(Stack<double> stack);
     }
 }
