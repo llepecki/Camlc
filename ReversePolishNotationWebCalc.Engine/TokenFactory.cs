@@ -2,7 +2,7 @@ using System;
 
 namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine
 {
-    public class BinaryOperatorTokenFactory
+    public class TokenFactory
     {
         private const string Plus = "plus";
         private const string Minus = "minus";
@@ -13,7 +13,7 @@ namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine
         {
             operation = operation.Trim().ToLower();
 
-            switch(operation)
+            switch (operation)
             {
                 case Plus:
                     return new PlusOperatorToken();

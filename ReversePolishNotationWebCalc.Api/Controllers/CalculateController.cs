@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Lepecki.Playground.ReversePolishNotationWebCalc.Api.Controllers
 {
-    // TODO: add Swagger
     [ApiController]
     [Route("api/[controller]")]
     public class CalculateController : ControllerBase

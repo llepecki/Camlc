@@ -15,7 +15,7 @@ namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine
         public double Calculate(string expr)
         {
             RpnExpr rpnExpr = _toRpnConverter.Convert(expr);
-            
+
             var stack = new Stack<double>();
 
             foreach (Token token in rpnExpr)

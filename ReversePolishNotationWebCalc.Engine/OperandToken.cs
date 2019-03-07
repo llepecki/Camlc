@@ -18,7 +18,7 @@ namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine
             {
                 throw new ArgumentNullException(nameof(stack));
             }
-            
+
             stack.Push(_value);
         }
     }

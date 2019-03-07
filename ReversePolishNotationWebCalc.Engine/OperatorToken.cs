@@ -15,7 +15,7 @@ namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine
             {
                 throw new ArgumentNullException(nameof(stack));
             }
-            
+
             double[] args = new double[ArgCount];
 
             for (int i = 0; i < ArgCount; i++)

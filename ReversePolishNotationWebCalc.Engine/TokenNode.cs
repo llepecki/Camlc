@@ -10,9 +10,9 @@ namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine
         }
 
         public Token Token { get; }
-        
+
         public TokenNode Left { get; set; }
-        
+
         public TokenNode Right { get; set; }
     }
 }

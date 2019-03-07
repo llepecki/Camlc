@@ -20,10 +20,5 @@ namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine
             ExprTree exprTree = _exprTreeFactory.Build(exprMembers);
             return new RpnExpr(exprTree.TraverseInOrder());
         }
-
-        private string[] ExtractExprMembers(string expr)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

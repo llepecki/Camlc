@@ -9,17 +9,15 @@ namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine.Test
         [Test]
         public void Test()
         {
-            var factory = new BinaryOperatorTokenFactory();
-
             Token[] tokens =
             {
                 new OperandToken(2),
                 new OperandToken(3),
-                factory.Create("plus"),
+                new PlusOperatorToken(),
                 new OperandToken(5),
-                factory.Create("multiply")
+                new MultiplyOperatorToken()
             };
-            
+
             var rpnExpr = new RpnExpr(tokens);
 
             var toRpnConverterMock = new Mock<IToRpnConverter>();

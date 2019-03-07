@@ -30,3 +30,4 @@ namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine
         }
     }
 }
+
