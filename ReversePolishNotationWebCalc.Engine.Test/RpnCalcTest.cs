@@ -1,3 +1,4 @@
+using Lepecki.Playground.ReversePolishNotationWebCalc.Engine.Abstractions;
 using Moq;
 using NUnit.Framework;
 
@@ -13,7 +14,7 @@ namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine.Test
             {
                 new OperandToken(2),
                 new OperandToken(3),
-                new PlusOperatorToken(),
+                new AddOperatorToken(),
                 new OperandToken(5),
                 new MultiplyOperatorToken()
             };

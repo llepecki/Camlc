@@ -4,8 +4,8 @@ namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine
 {
     public class TokenFactory
     {
-        private const string Plus = "plus";
-        private const string Minus = "minus";
+        private const string Add = "add";
+        private const string Subtract = "sub";
         private const string Multiply = "multiply";
         private const string Divide = "divide";
 
@@ -15,11 +15,11 @@ namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine
 
             switch (operation)
             {
-                case Plus:
-                    return new PlusOperatorToken();
+                case Add:
+                    return new AddOperatorToken();
 
-                case Minus:
-                    return new MinusOperatorToken();
+                case Subtract:
+                    return new SubtractOperatorToken();
 
                 case Multiply:
                     return new MultiplyOperatorToken();

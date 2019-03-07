@@ -13,7 +13,7 @@ namespace Lepecki.Playground.ReversePolishNotationWebCalc.Api
             options.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
         }
         
-        public static void SetupUIOptions(SwaggerUIOptions options)
+        public static void SetupUiOptions(SwaggerUIOptions options)
         {
             options.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             options.RoutePrefix = string.Empty;

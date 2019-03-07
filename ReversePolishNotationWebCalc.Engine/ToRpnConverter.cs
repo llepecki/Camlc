@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Lepecki.Playground.ReversePolishNotationWebCalc.Engine.Abstractions;
 
 namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine
 {

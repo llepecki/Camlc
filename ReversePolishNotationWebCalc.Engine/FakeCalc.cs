@@ -1,3 +1,5 @@
+using Lepecki.Playground.ReversePolishNotationWebCalc.Engine.Abstractions;
+
 namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine
 {
     public class FakeCalc : ICalc

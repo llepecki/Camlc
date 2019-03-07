@@ -37,7 +37,7 @@ namespace Lepecki.Playground.ReversePolishNotationWebCalc.Api
             // app.UseHttpsRedirection();
             app.UseMvc();
             app.UseSwagger();
-            app.UseSwaggerUI(SwaggerConfigurator.SetupUIOptions);
+            app.UseSwaggerUI(SwaggerConfigurator.SetupUiOptions);
         }
     }
 }

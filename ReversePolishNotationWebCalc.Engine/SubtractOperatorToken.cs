@@ -1,6 +1,6 @@
 namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine
 {
-    public class MinusOperatorToken : BinaryOperatorToken
+    public class SubtractOperatorToken : BinaryOperatorToken
     {
         protected override double Calculate(double a, double b)
         {
