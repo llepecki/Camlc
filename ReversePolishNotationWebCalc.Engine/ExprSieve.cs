@@ -7,15 +7,15 @@ namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine
 {
     public class ExprSieve : IExprSieve
     {
-        private static readonly Regex _tokenRegex = new Regex(@"\s*(add|sub|mul|div|pow|min|max|neg|\d+(.\d+)?|\(|\))\s*", RegexOptions.IgnoreCase);
+        private static readonly Regex TokenRegex = new Regex(Patterns.AnyToken, RegexOptions.IgnoreCase);
 
         public IReadOnlyCollection<string> Sieve(string expr)
         {
-            Match match = _tokenRegex.Match(expr);
-            return IdentifyExprComponents(match).ToArray();
+            Match match = TokenRegex.Match(expr);
+            return IdentifyOperandsAndOperators(match).ToArray();
         }
 
-        private IEnumerable<string> IdentifyExprComponents(Match match)
+        private IEnumerable<string> IdentifyOperandsAndOperators(Match match)
         {
             while (match.Success)
             {

@@ -13,7 +13,7 @@ namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine.Test
         public IReadOnlyCollection<string> ConvertShouldReturnCollectionOfOperandsAndOperatorsWithoutParenthesisInPostfixNotationOrder(string semicolonSeparatedOperandsAndOperators)
         {
             string[] operandsAndOperators = semicolonSeparatedOperandsAndOperators.Split(';');
-            IInfixToPostfixConverter converter = new InfixToPostfixConverter();
+            IInfixToPostfixConverter converter = new InfixToPostfixConverter(new TokenDescriptorFactory()); // TODO: remove
             return converter.Convert(operandsAndOperators);
         }
     }

@@ -15,10 +15,10 @@ namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine.Test
         [TestCase("div", ExpectedResult = typeof(DivideOperatorToken), Description = "Divide", TestOf = typeof(Tokenizer))]
         [TestCase("pow", ExpectedResult = typeof(PowerOperatorToken), Description = "Power", TestOf = typeof(Tokenizer))]
         [TestCase("neg", ExpectedResult = typeof(NegationOperatorToken), Description = "Negation", TestOf = typeof(Tokenizer))]
-        public Type TokenizerShouldCreateTokenCorrespondingToItsStringRepresentation(string operandOrOperator)
+        public Type TokenizerShouldCreateTokenCorrespondingToItsStringRepresentation(string symbol)
         {
             ITokenizer tokenizer = new Tokenizer();
-            Token token = tokenizer.Create(operandOrOperator);
+            Token token = tokenizer.Create(symbol);
             return token.GetType();
         }
     }

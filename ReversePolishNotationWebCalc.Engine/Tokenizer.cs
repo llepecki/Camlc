@@ -7,26 +7,26 @@ namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine
 {
     public class Tokenizer : ITokenizer
     {
-        private readonly Regex _operandRegex = new Regex(@"^\d+(.\d+)?$");
+        private readonly Regex _operandRegex = new Regex(Patterns.Decimal);
 
-        public Token Create(string operandOrOperator)
+        public Token Create(string symbol)
         {
-            if (_operandRegex.IsMatch(operandOrOperator))
+            if (_operandRegex.IsMatch(symbol))
             {
-                return new OperandToken(Double.Parse(operandOrOperator, CultureInfo.InvariantCulture));
+                return new OperandToken(Double.Parse(symbol, CultureInfo.InvariantCulture));
             }
 
-            switch (operandOrOperator)
+            switch (symbol)
             {
-                case "add": return new AddOperatorToken();
-                case "sub": return new SubtractOperatorToken();
-                case "mul": return new MultiplyOperatorToken();
-                case "div": return new DivideOperatorToken();
-                case "pow": return new PowerOperatorToken();
-                case "neg": return new NegationOperatorToken();
+                case Operators.Add: return new AddOperatorToken();
+                case Operators.Subtract: return new SubtractOperatorToken();
+                case Operators.Multiply: return new MultiplyOperatorToken();
+                case Operators.Divide: return new DivideOperatorToken();
+                case Operators.Power: return new PowerOperatorToken();
+                case Operators.Negate: return new NegationOperatorToken();
 
                 default:
-                    throw new ArgumentException($"Unknown operand: {operandOrOperator}");
+                    throw new ArgumentException($"Unknown operand: {symbol}");
             }
         }
     }

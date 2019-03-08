@@ -12,7 +12,7 @@ namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine.Test
         public double CalculateShouldReturnExpectedResult(string expr)
         {
             IExprSieve exprSieve = new ExprSieve();
-            IInfixToPostfixConverter infixToPostfixConverter = new InfixToPostfixConverter();
+            IInfixToPostfixConverter infixToPostfixConverter = new InfixToPostfixConverter(new TokenDescriptorFactory()); // TODO remove
             ITokenizer tokenizer = new Tokenizer();
             IToRpnConverter toRpnConverter = new ToRpnConverter(exprSieve, infixToPostfixConverter, tokenizer);
 
