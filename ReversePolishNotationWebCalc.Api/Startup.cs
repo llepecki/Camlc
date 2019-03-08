@@ -10,11 +10,11 @@ namespace Lepecki.Playground.ReversePolishNotationWebCalc.Api
     public class Startup
     {
         private readonly SwaggerConfigurator _swaggerConfigurator;
-        
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            
+
             _swaggerConfigurator = new SwaggerConfigurator();
         }
 
