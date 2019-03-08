@@ -8,7 +8,7 @@ namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine
     public class Tokenizer : ITokenizer
     {
         private readonly Regex _operandRegex = new Regex(@"^\d+(.\d+)?$");
-        
+
         public Token Create(string operandOrOperator)
         {
             if (_operandRegex.IsMatch(operandOrOperator))
@@ -24,7 +24,7 @@ namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine
                 case "div": return new DivideOperatorToken();
                 case "pow": return new PowerOperatorToken();
                 case "neg": return new NegationOperatorToken();
-                
+
                 default:
                     throw new ArgumentException($"Unknown operand: {operandOrOperator}");
             }
