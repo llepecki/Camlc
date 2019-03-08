@@ -8,6 +8,8 @@ namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine.Module
         public static void AddEngine(this IServiceCollection serviceCollection)
         {
             serviceCollection.AddTransient<ICalc, FakeCalc>();
+            serviceCollection.AddTransient<IToRpnConverter, ToRpnConverter>();
+            serviceCollection.AddTransient<IExprSieve, ExprSieve>();
         }
     }
 }

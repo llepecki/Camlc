@@ -9,9 +9,13 @@ namespace Lepecki.Playground.ReversePolishNotationWebCalc.Api
 {
     public class Startup
     {
+        private readonly SwaggerConfigurator _swaggerConfigurator;
+        
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            
+            _swaggerConfigurator = new SwaggerConfigurator();
         }
 
         public IConfiguration Configuration { get; }
@@ -19,7 +23,7 @@ namespace Lepecki.Playground.ReversePolishNotationWebCalc.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            services.AddSwaggerGen(SwaggerConfigurator.SetupGenOptions);
+            services.AddSwaggerGen(_swaggerConfigurator.SetupGenOptions);
             services.AddEngine();
         }
 
@@ -37,7 +41,7 @@ namespace Lepecki.Playground.ReversePolishNotationWebCalc.Api
             // app.UseHttpsRedirection();
             app.UseMvc();
             app.UseSwagger();
-            app.UseSwaggerUI(SwaggerConfigurator.SetupUiOptions);
+            app.UseSwaggerUI(_swaggerConfigurator.SetupUiOptions);
         }
     }
 }

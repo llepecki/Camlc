@@ -4,6 +4,6 @@ namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine.Abstractions
 {
     public interface IExprSieve
     {
-        IEnumerable<string> Sieve(string expr);
+        IReadOnlyCollection<string> Sieve(string expr);
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine
 {
-    [Obsolete("This responsibility should probably be in the converter")]
+    [Obsolete("Remove", true)]
     public class RpnExprBuilder
     {
         private readonly IList<Token> _tokens = new List<Token>();

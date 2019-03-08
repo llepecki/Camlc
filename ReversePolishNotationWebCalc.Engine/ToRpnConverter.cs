@@ -1,25 +1,32 @@
+using Lepecki.Playground.ReversePolishNotationWebCalc.Engine.Abstractions;
 using System;
 using System.Collections.Generic;
-using Lepecki.Playground.ReversePolishNotationWebCalc.Engine.Abstractions;
+using System.Linq;
 
 namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine
 {
     public class ToRpnConverter : IToRpnConverter
     {
         private readonly IExprSieve _exprSieve;
-        private readonly IExprTreeFactory _exprTreeFactory;
+        private readonly IInfixToPostfixConverter _infixToPostfixConverter;
+        private readonly ITokenizer _tokenizer;
 
-        public ToRpnConverter(IExprSieve exprSieve, IExprTreeFactory exprTreeFactory)
+        public ToRpnConverter(
+            IExprSieve exprSieve,
+            IInfixToPostfixConverter infixToPostfixConverter,
+            ITokenizer tokenizer)
         {
             _exprSieve = exprSieve ?? throw new ArgumentNullException(nameof(exprSieve));
-            _exprTreeFactory = exprTreeFactory ?? throw new ArgumentNullException(nameof(exprTreeFactory));
+            _infixToPostfixConverter = infixToPostfixConverter ?? throw new ArgumentNullException(nameof(infixToPostfixConverter));
+            _tokenizer = tokenizer ?? throw new ArgumentNullException(nameof(tokenizer));
         }
 
         public RpnExpr Convert(string expr)
         {
-            IEnumerable<string> exprMembers = _exprSieve.Sieve(expr); // shitty name; to a separate class?
-            ExprTree exprTree = _exprTreeFactory.Build(exprMembers);
-            return new RpnExpr(exprTree.TraverseInOrder());
+            IReadOnlyCollection<string> infixExpr = _exprSieve.Sieve(expr);
+            IReadOnlyCollection<string> postfixExpr = _infixToPostfixConverter.Convert(infixExpr);
+            IEnumerable<Token> tokens = postfixExpr.Select(p => _tokenizer.Create(p));
+            return new RpnExpr(tokens);
         }
     }
 }

@@ -2,6 +2,7 @@ using System;
 
 namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine
 {
+    [Obsolete("Remove", true)]
     public class TokenNode
     {
         public TokenNode(Token token)

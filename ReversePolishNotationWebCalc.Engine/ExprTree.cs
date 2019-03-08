@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine
 {
+    [Obsolete("Remove", true)]
     public class ExprTree
     {
         private readonly TokenNode _root;
@@ -12,7 +13,7 @@ namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine
             _root = root ?? throw new ArgumentNullException(nameof(root));
         }
 
-        public IEnumerable<Token> TraverseInOrder() // in order?
+        public IEnumerable<Token> TraverseInOrder()
         {
             throw new NotImplementedException();
         }

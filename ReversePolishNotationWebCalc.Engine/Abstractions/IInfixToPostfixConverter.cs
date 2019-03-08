@@ -4,6 +4,6 @@ namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine.Abstractions
 {
     public interface IInfixToPostfixConverter
     {
-        IEnumerable<string> Convert(IEnumerable<string> infixExpr);
+        IReadOnlyCollection<string> Convert(IEnumerable<string> infixExpr);
     }
 }

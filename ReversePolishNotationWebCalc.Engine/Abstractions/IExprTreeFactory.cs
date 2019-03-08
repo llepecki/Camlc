@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine.Abstractions
 {
-    [Obsolete("I probably won't be using a tree")]
+    [Obsolete("Remove", true)]
     public interface IExprTreeFactory
     {
         ExprTree Build(IEnumerable<string> exprMembers);
