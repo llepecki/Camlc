@@ -1,9 +1,0 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyName>Lepecki.Playground.ReversePolishNotationWebCalc.Engine</AssemblyName>
-    <RootNamespace>Lepecki.Playground.ReversePolishNotationWebCalc.Engine</RootNamespace>
-  </PropertyGroup>
-
-</Project>
