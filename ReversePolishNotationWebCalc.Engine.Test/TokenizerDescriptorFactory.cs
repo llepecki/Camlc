@@ -17,7 +17,7 @@ namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine.Test
             Assert.False(tokenDescriptor.IsOperator);
             Assert.False(tokenDescriptor.IsLeftParenthesis);
             Assert.False(tokenDescriptor.IsRightParenthesis);
-            Assert.AreEqual(0, tokenDescriptor.Priority);
+            Assert.AreEqual(0, tokenDescriptor.Precedence);
         }
 
         [TestCase("add", 1, TestOf = typeof(TokenDescriptorFactory))]
@@ -35,7 +35,7 @@ namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine.Test
             Assert.True(tokenDescriptor.IsOperator);
             Assert.False(tokenDescriptor.IsLeftParenthesis);
             Assert.False(tokenDescriptor.IsRightParenthesis);
-            Assert.AreEqual(expectedPriority, tokenDescriptor.Priority);
+            Assert.AreEqual(expectedPriority, tokenDescriptor.Precedence);
         }
 
         [Test(TestOf = typeof(TokenDescriptorFactory))]
@@ -48,7 +48,7 @@ namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine.Test
             Assert.False(tokenDescriptor.IsOperator);
             Assert.True(tokenDescriptor.IsLeftParenthesis);
             Assert.False(tokenDescriptor.IsRightParenthesis);
-            Assert.AreEqual(5, tokenDescriptor.Priority);
+            Assert.AreEqual(5, tokenDescriptor.Precedence);
         }
 
         [Test(TestOf = typeof(TokenDescriptorFactory))]
@@ -61,7 +61,7 @@ namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine.Test
             Assert.False(tokenDescriptor.IsOperator);
             Assert.False(tokenDescriptor.IsLeftParenthesis);
             Assert.True(tokenDescriptor.IsRightParenthesis);
-            Assert.AreEqual(5, tokenDescriptor.Priority);
+            Assert.AreEqual(5, tokenDescriptor.Precedence);
         }
     }
 }

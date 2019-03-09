@@ -1,6 +1,6 @@
 using System;
 
-namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine
+namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine.Tokens
 {
     public abstract class BinaryOperatorToken : OperatorToken
     {

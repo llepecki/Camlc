@@ -1,4 +1,5 @@
 using Lepecki.Playground.ReversePolishNotationWebCalc.Engine.Abstractions;
+using Lepecki.Playground.ReversePolishNotationWebCalc.Engine.Tokens;
 using NUnit.Framework;
 using System;
 
@@ -18,7 +19,8 @@ namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine.Test
         public Type TokenizerShouldCreateTokenCorrespondingToItsStringRepresentation(string symbol)
         {
             ITokenizer tokenizer = new Tokenizer();
-            Token token = tokenizer.Create(symbol);
+            ITokenDescriptorFactory tokenDescriptorFactory = new TokenDescriptorFactory();
+            Token token = tokenizer.Create(tokenDescriptorFactory.Create(symbol));
             return token.GetType();
         }
     }

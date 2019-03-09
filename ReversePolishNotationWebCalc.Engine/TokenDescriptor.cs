@@ -1,22 +1,21 @@
+using System;
 using System.Text.RegularExpressions;
 
 namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine
 {
-    public class TokenDescriptor
+    public class TokenDescriptor // TODO: add nice debugger representation
     {
-        private readonly Regex _operandRegex = new Regex(Patterns.Decimal);
+        private readonly string _symbol;
 
-        public TokenDescriptor(string source, bool isOperand, bool isOperator, bool isLeftParenthesis, bool isRightParenthesis, int priority)
+        public TokenDescriptor(string symbol, bool isOperand, bool isOperator, bool isLeftParenthesis, bool isRightParenthesis, int precedence)
         {
-            Source = source;
             IsOperand = isOperand;
             IsOperator = isOperator;
             IsLeftParenthesis = isLeftParenthesis;
             IsRightParenthesis = isRightParenthesis;
-            Priority = priority;
+            Precedence = precedence;
+            _symbol = symbol;
         }
-
-        public string Source { get; }
 
         public bool IsOperand { get; }
 
@@ -26,6 +25,11 @@ namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine
 
         public bool IsRightParenthesis { get; }
 
-        public int Priority { get; }
+        public int Precedence { get; }
+
+        public override string ToString()
+        {
+            return _symbol;
+        }
     }
 }

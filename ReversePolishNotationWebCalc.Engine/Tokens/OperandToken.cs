@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine
+namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine.Tokens
 {
     public class OperandToken : Token
     {

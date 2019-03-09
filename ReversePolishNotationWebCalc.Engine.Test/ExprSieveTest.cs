@@ -1,6 +1,6 @@
-using System.Collections.Generic;
 using Lepecki.Playground.ReversePolishNotationWebCalc.Engine.Abstractions;
 using NUnit.Framework;
+using System.Collections.Generic;
 
 namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine.Test
 {

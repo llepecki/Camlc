@@ -24,7 +24,7 @@ namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine
         public RpnExpr Convert(string expr)
         {
             IReadOnlyCollection<string> infixExpr = _exprSieve.Sieve(expr);
-            IReadOnlyCollection<string> postfixExpr = _infixToPostfixConverter.Convert(infixExpr);
+            IReadOnlyCollection<TokenDescriptor> postfixExpr = _infixToPostfixConverter.Convert(infixExpr);
             IEnumerable<Token> tokens = postfixExpr.Select(symbol => _tokenizer.Create(symbol));
             return new RpnExpr(tokens);
         }

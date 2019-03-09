@@ -1,4 +1,4 @@
-namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine
+namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine.Tokens
 {
     public class MultiplyOperatorToken : BinaryOperatorToken
     {

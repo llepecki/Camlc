@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine
+namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine.Tokens
 {
     public abstract class OperatorToken : Token
     {
@@ -18,7 +18,7 @@ namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine
 
             double[] args = new double[ArgCount];
 
-            for (int i = 0; i < ArgCount; i++)
+            for (int i = ArgCount - 1; i >= 0; i--)
             {
                 args[i] = stack.Pop();
             }

@@ -2,6 +2,7 @@ using Lepecki.Playground.ReversePolishNotationWebCalc.Engine.Abstractions;
 using System;
 using System.Globalization;
 using System.Text.RegularExpressions;
+using Lepecki.Playground.ReversePolishNotationWebCalc.Engine.Tokens;
 
 namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine
 {
@@ -9,25 +10,35 @@ namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine
     {
         private readonly Regex _operandRegex = new Regex(Patterns.Decimal);
 
-        public Token Create(string symbol)
+        public Token Create(TokenDescriptor tokenDescriptor)
         {
-            if (_operandRegex.IsMatch(symbol))
+            if (tokenDescriptor.IsOperand)
             {
-                return new OperandToken(Double.Parse(symbol, CultureInfo.InvariantCulture));
+                return new OperandToken(Double.Parse(tokenDescriptor.ToString(), CultureInfo.InvariantCulture));
+            }
+            
+            if (tokenDescriptor.IsOperator)
+            {
+                switch (tokenDescriptor.ToString())
+                {
+                    case Operators.Add: return new AddOperatorToken();
+                    case Operators.Subtract: return new SubtractOperatorToken();
+                    case Operators.Multiply: return new MultiplyOperatorToken();
+                    case Operators.Divide: return new DivideOperatorToken();
+                    case Operators.Power: return new PowerOperatorToken();
+                    case Operators.Negate: return new NegationOperatorToken();
+
+                    default:
+                        throw new ArgumentException($"Unknown operator: {tokenDescriptor}");
+                }
             }
 
-            switch (symbol)
+            if (tokenDescriptor.IsLeftParenthesis || tokenDescriptor.IsRightParenthesis)
             {
-                case Operators.Add: return new AddOperatorToken();
-                case Operators.Subtract: return new SubtractOperatorToken();
-                case Operators.Multiply: return new MultiplyOperatorToken();
-                case Operators.Divide: return new DivideOperatorToken();
-                case Operators.Power: return new PowerOperatorToken();
-                case Operators.Negate: return new NegationOperatorToken();
-
-                default:
-                    throw new ArgumentException($"Unknown operand: {symbol}");
+                throw new InvalidOperationException("A parenthesis can't be turned into a token");
             }
+            
+            throw new InvalidOperationException("Invalid token descriptor");
         }
     }
 }

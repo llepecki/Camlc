@@ -1,6 +1,7 @@
 using Lepecki.Playground.ReversePolishNotationWebCalc.Engine.Abstractions;
 using NUnit.Framework;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine.Test
 {
@@ -13,8 +14,9 @@ namespace Lepecki.Playground.ReversePolishNotationWebCalc.Engine.Test
         public IReadOnlyCollection<string> ConvertShouldReturnCollectionOfOperandsAndOperatorsWithoutParenthesisInPostfixNotationOrder(string semicolonSeparatedOperandsAndOperators)
         {
             string[] operandsAndOperators = semicolonSeparatedOperandsAndOperators.Split(';');
-            IInfixToPostfixConverter converter = new InfixToPostfixConverter(new TokenDescriptorFactory()); // TODO: remove
-            return converter.Convert(operandsAndOperators);
+            ITokenDescriptorFactory tokenDescriptorFactory = new TokenDescriptorFactory();
+            IInfixToPostfixConverter converter = new InfixToPostfixConverter(tokenDescriptorFactory);
+            return converter.Convert(operandsAndOperators).Select(tokenDescriptor => tokenDescriptor.ToString()).ToArray();
         }
     }
 }
