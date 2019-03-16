@@ -1,6 +1,6 @@
 namespace Lepecki.Playground.Camel.Engine
 {
-    public class TokenDescriptor // TODO: add nice debugger representation
+    public class TokenDescriptor
     {
         private readonly string _symbol;
 

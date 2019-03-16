@@ -10,6 +10,9 @@ namespace Lepecki.Playground.Camel.Engine.Module
             serviceCollection.AddTransient<ICalc, YouBastardCalc>();
             serviceCollection.AddTransient<IToRpnConverter, ToRpnConverter>();
             serviceCollection.AddTransient<IExprSieve, ExprSieve>();
+            serviceCollection.AddTransient<IInfixToPostfixConverter, InfixToPostfixConverter>();
+            serviceCollection.AddTransient<ITokenizer, Tokenizer>();
+            serviceCollection.AddTransient<ITokenDescriptorFactory, TokenDescriptorFactory>();
         }
     }
 }

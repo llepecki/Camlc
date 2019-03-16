@@ -11,11 +11,19 @@ namespace Lepecki.Playground.Camel.Api
     {
         private readonly SwaggerConfigurator _swaggerConfigurator;
 
+        public Startup()
+        {
+            _swaggerConfigurator = new SwaggerConfigurator
+            {
+                Name = "Camel API",
+                Version = "v1",
+                Description = "Web calculator poweredy by Reverse Polish Notation"
+            };
+        }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-
-            _swaggerConfigurator = new SwaggerConfigurator();
         }
 
         public IConfiguration Configuration { get; }

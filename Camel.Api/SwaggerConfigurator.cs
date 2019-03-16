@@ -8,14 +8,20 @@ namespace Lepecki.Playground.Camel.Api
 {
     public class SwaggerConfigurator
     {
+        public string Name { get; set; }
+
+        public string Version { get; set; }
+
+        public string Description { get; set; }
+
         public void SetupGenOptions(SwaggerGenOptions options)
         {
-            options.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
+            options.SwaggerDoc(Version, new Info { Title = Name, Version = Version });
         }
 
         public void SetupUiOptions(SwaggerUIOptions options)
         {
-            options.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            options.SwaggerEndpoint($"/swagger/{Version}/swagger.json", $"{Name} {Version}");
             options.RoutePrefix = string.Empty;
         }
     }

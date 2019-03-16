@@ -1,12 +1,11 @@
-﻿using System;
-using Lepecki.Playground.Camel.Engine.Abstractions;
+﻿using Lepecki.Playground.Camel.Engine.Abstractions;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace Lepecki.Playground.Camel.Api.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
-    [Produces("application/txt", Type = typeof(double))]
+    [Route("api/calculate")]
     [ProducesResponseType(200, Type = typeof(double))]
     public class CalculateController : ControllerBase
     {
