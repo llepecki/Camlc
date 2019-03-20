@@ -17,7 +17,7 @@ namespace Lepecki.Playground.Camel.Api
             {
                 Name = "Camel API",
                 Version = "v1",
-                Description = "Web calculator poweredy by Reverse Polish Notation"
+                Description = "Web calculator powered by Reverse Polish Notation"
             };
         }
 

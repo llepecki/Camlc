@@ -1,7 +1,8 @@
+using Lepecki.Playground.Camel.Engine.Abstractions;
+using Lepecki.Playground.Camel.Engine.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Lepecki.Playground.Camel.Engine.Abstractions;
 
 namespace Lepecki.Playground.Camel.Engine
 {
@@ -25,7 +26,7 @@ namespace Lepecki.Playground.Camel.Engine
         {
             IReadOnlyCollection<string> infixExpr = _exprSieve.Sieve(expr);
             IReadOnlyCollection<TokenDescriptor> postfixExpr = _infixToPostfixConverter.Convert(infixExpr);
-            IEnumerable<Token> tokens = postfixExpr.Select(symbol => _tokenizer.Create(symbol));
+            IEnumerable<Token> tokens = postfixExpr.Select(_tokenizer.Create);
             return new RpnExpr(tokens);
         }
     }

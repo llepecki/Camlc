@@ -2,14 +2,11 @@ using Lepecki.Playground.Camel.Engine.Abstractions;
 using Lepecki.Playground.Camel.Engine.Tokens;
 using System;
 using System.Globalization;
-using System.Text.RegularExpressions;
 
 namespace Lepecki.Playground.Camel.Engine
 {
     public class Tokenizer : ITokenizer
     {
-        private readonly Regex _operandRegex = new Regex(Patterns.Decimal);
-
         public Token Create(TokenDescriptor tokenDescriptor)
         {
             if (tokenDescriptor.IsOperand)

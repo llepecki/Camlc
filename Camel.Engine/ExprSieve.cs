@@ -1,7 +1,7 @@
+using Lepecki.Playground.Camel.Engine.Abstractions;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Lepecki.Playground.Camel.Engine.Abstractions;
 
 namespace Lepecki.Playground.Camel.Engine
 {
@@ -12,10 +12,10 @@ namespace Lepecki.Playground.Camel.Engine
         public IReadOnlyCollection<string> Sieve(string expr)
         {
             Match match = TokenRegex.Match(expr);
-            return IdentifyOperandsAndOperators(match).ToArray();
+            return IdentifySymbols(match).ToArray();
         }
 
-        private IEnumerable<string> IdentifyOperandsAndOperators(Match match)
+        private IEnumerable<string> IdentifySymbols(Match match)
         {
             while (match.Success)
             {

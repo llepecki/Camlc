@@ -1,16 +1,16 @@
+using Lepecki.Playground.Camel.Engine.Abstractions;
 using System;
 using System.Text.RegularExpressions;
-using Lepecki.Playground.Camel.Engine.Abstractions;
 
 namespace Lepecki.Playground.Camel.Engine
 {
     public class TokenDescriptorFactory : ITokenDescriptorFactory
     {
-        private readonly Regex _operandRegex = new Regex(Patterns.Decimal);
+        private static readonly Regex OperandRegex = new Regex(Patterns.Decimal);
 
         public TokenDescriptor Create(string symbol)
         {
-            if (_operandRegex.IsMatch(symbol))
+            if (OperandRegex.IsMatch(symbol))
             {
                 return new TokenDescriptor(symbol, true, false, false, false, 0);
             }

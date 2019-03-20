@@ -1,7 +1,6 @@
 using System;
-using Lepecki.Playground.Camel.Engine.Tokens;
 
-namespace Lepecki.Playground.Camel.Engine
+namespace Lepecki.Playground.Camel.Engine.Tokens
 {
     public abstract class UnaryOperatorToken : OperatorToken
     {

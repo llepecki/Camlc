@@ -14,9 +14,9 @@ namespace Lepecki.Playground.Camel.Engine
             _tokenDescriptorFactory = tokenDescriptorFactory ?? throw new ArgumentNullException(nameof(tokenDescriptorFactory));
         }
 
-        public IReadOnlyCollection<TokenDescriptor> Convert(IEnumerable<string> operandsAndOperators)
+        public IReadOnlyCollection<TokenDescriptor> Convert(IEnumerable<string> symbols)
         {
-            IEnumerable<TokenDescriptor> tokenDescriptors = operandsAndOperators.Select(_tokenDescriptorFactory.Create);
+            IEnumerable<TokenDescriptor> tokenDescriptors = symbols.Select(_tokenDescriptorFactory.Create);
             IList<TokenDescriptor> tokenDescriptorsInPostfixOrder = new List<TokenDescriptor>();
             var stack = new Stack<TokenDescriptor>();
 
@@ -46,7 +46,7 @@ namespace Lepecki.Playground.Camel.Engine
                 {
                     stack.Push(tokenDescriptor);
                 }
-                else if (tokenDescriptor.Precedence > stack.Peek().Precedence) // TODO: precedence?
+                else if (tokenDescriptor.Precedence > stack.Peek().Precedence)
                 {
                     stack.Push(tokenDescriptor);
                 }

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Lepecki.Playground.Camel.Engine
+namespace Lepecki.Playground.Camel.Engine.Tokens
 {
     public abstract class Token
     {

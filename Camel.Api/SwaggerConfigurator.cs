@@ -16,7 +16,7 @@ namespace Lepecki.Playground.Camel.Api
 
         public void SetupGenOptions(SwaggerGenOptions options)
         {
-            options.SwaggerDoc(Version, new Info { Title = Name, Version = Version });
+            options.SwaggerDoc(Version, new Info { Title = Name, Version = Version, Description = Description });
         }
 
         public void SetupUiOptions(SwaggerUIOptions options)
