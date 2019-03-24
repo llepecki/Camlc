@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 namespace Lepecki.Playground.Camel.Engine
 {
+    // etymology of this class' name can by found in "Pyramids" by Terry Pratchett
     public class YouBastardCalc : ICalc
     {
         private readonly IToRpnConverter _toRpnConverter;

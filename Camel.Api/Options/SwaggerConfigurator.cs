@@ -4,7 +4,7 @@ using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Swashbuckle.AspNetCore.SwaggerUI;
 
-namespace Lepecki.Playground.Camel.Api
+namespace Lepecki.Playground.Camel.Api.Options
 {
     public class SwaggerConfigurator
     {

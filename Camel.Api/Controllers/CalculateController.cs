@@ -1,12 +1,13 @@
-﻿using Lepecki.Playground.Camel.Engine.Abstractions;
+﻿using Lepecki.Playground.Camel.Api.Validation;
+using Lepecki.Playground.Camel.Engine.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Lepecki.Playground.Camel.Api.Controllers
 {
     [ApiController]
-    [Route("api/calculate")]
-    [ProducesResponseType(200, Type = typeof(double))]
+    [Route("api/[controller]")]
     public class CalculateController : ControllerBase
     {
         private readonly ICalc _calc;
@@ -17,7 +18,9 @@ namespace Lepecki.Playground.Camel.Api.Controllers
         }
 
         [HttpGet]
-        public ActionResult<double> Get([FromQuery] string expr)
+        [Route("")]
+        [ProducesResponseType(200, Type = typeof(double))]
+        public ActionResult<double> Get([FromQuery, Required, InfixExpr] string expr)
         {
             return _calc.Calculate(expr);
         }
