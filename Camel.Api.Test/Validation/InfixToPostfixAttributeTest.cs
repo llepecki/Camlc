@@ -1,18 +1,15 @@
+using System.ComponentModel.DataAnnotations;
 using NUnit.Framework;
 
 namespace Lepecki.Playground.Camel.Api.Test.Validation
 {
+    [TestFixture]
     public class InfixToPostfixAttributeTest
     {
-        [SetUp]
-        public void Setup()
+        [TestCase]
+        public ValidationResult Test(string expr)
         {
-        }
-
-        [Test]
-        public void Test1()
-        {
-            Assert.Pass();
+            return null;
         }
     }
 }
