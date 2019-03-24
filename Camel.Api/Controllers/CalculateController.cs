@@ -1,8 +1,8 @@
 ﻿using Lepecki.Playground.Camel.Api.Validation;
 using Lepecki.Playground.Camel.Engine.Abstractions;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.ComponentModel.DataAnnotations;
 
 namespace Lepecki.Playground.Camel.Api.Controllers
 {
@@ -19,8 +19,9 @@ namespace Lepecki.Playground.Camel.Api.Controllers
 
         [HttpGet]
         [Route("")]
-        [ProducesResponseType(200, Type = typeof(decimal))]
-        public ActionResult<decimal> Calculate([FromQuery, Required, InfixExpr] string expr)
+        [ProducesResponseType(typeof(decimal), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        public ActionResult<decimal> Calculate([FromQuery, InfixExpr] string expr)
         {
             return _calc.Calculate(expr);
         }

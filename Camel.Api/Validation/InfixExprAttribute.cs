@@ -2,18 +2,24 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Lepecki.Playground.Camel.Api.Validation
 {
-    public class InfixExprAttribute : ValidationAttribute
+    public class InfixExprAttribute : RequiredAttribute
     {
+        public InfixExprAttribute()
+        {
+            ErrorMessage = "Value is required";
+        }
+
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            var expr = value as string;
+            ValidationResult initialValidationResult = base.IsValid(value, validationContext);
 
-            if (expr == null)
+            if (initialValidationResult != ValidationResult.Success)
             {
-                // validation for this case was already done by the Required attribute
-                return ValidationResult.Success;
+                return initialValidationResult;
             }
-            
+
+            string expr = value as string;
+
             return ValidationResult.Success;
         }
     }
