@@ -11,16 +11,16 @@ namespace Lepecki.Playground.Camel.Engine.Test.Tokens
     public class DivideOperatorTokenTest
     {
         [TestCase(3, 4, ExpectedResult = 0.75, TestOf = typeof(DivideOperatorToken))]
-        public double OperatorShouldPushCorrectResultToStack(double a, double b)
+        public decimal OperatorShouldPushCorrectResultToStack(decimal a, decimal b)
         {
-            var stack = new Stack<double>();
+            var stack = new Stack<decimal>();
             stack.Push(a);
             stack.Push(b);
 
             var operatorToken = new DivideOperatorToken();
             operatorToken.PushOrCalculate(stack);
 
-            return Math.Round(stack.Pop(), 8);
+            return stack.Pop();
         }
     }
 }

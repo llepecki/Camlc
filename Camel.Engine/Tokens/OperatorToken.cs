@@ -7,23 +7,23 @@ namespace Lepecki.Playground.Camel.Engine.Tokens
     {
         protected abstract int ArgCount { get; }
 
-        protected abstract double Calculate(double[] args);
+        protected abstract decimal Calculate(decimal[] args);
 
-        public override void PushOrCalculate(Stack<double> stack)
+        public override void PushOrCalculate(Stack<decimal> stack)
         {
             if (stack == null)
             {
                 throw new ArgumentNullException(nameof(stack));
             }
 
-            double[] args = new double[ArgCount];
+            decimal[] args = new decimal[ArgCount];
 
             for (int i = ArgCount - 1; i >= 0; i--)
             {
                 args[i] = stack.Pop();
             }
 
-            double result = Calculate(args);
+            decimal result = Calculate(args);
             stack.Push(result);
         }
     }

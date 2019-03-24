@@ -11,16 +11,16 @@ namespace Lepecki.Playground.Camel.Engine.Test.Tokens
     public class AddOperatorTokenTest
     {
         [TestCase(3, 4, ExpectedResult = 7, TestOf = typeof(AddOperatorToken))]
-        public double OperatorShouldPushCorrectResultToStack(double a, double b)
+        public decimal OperatorShouldPushCorrectResultToStack(decimal a, decimal b)
         {
-            var stack = new Stack<double>();
+            var stack = new Stack<decimal>();
             stack.Push(a);
             stack.Push(b);
 
             var operatorToken = new AddOperatorToken();
             operatorToken.PushOrCalculate(stack);
 
-            return Math.Round(stack.Pop(), 8);
+            return stack.Pop();
         }
     }
 }

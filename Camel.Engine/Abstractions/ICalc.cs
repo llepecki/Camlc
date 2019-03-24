@@ -2,6 +2,6 @@
 {
     public interface ICalc
     {
-        double Calculate(string expr);
+        decimal Calculate(string expr);
     }
 }

@@ -15,11 +15,11 @@ namespace Lepecki.Playground.Camel.Engine
             _toRpnConverter = toRpnConverter ?? throw new ArgumentNullException(nameof(toRpnConverter));
         }
 
-        public double Calculate(string expr)
+        public decimal Calculate(string expr)
         {
             RpnExpr rpnExpr = _toRpnConverter.Convert(expr);
 
-            var stack = new Stack<double>();
+            var stack = new Stack<decimal>();
 
             foreach (Token token in rpnExpr)
             {

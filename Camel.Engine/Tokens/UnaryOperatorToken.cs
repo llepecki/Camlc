@@ -4,11 +4,11 @@ namespace Lepecki.Playground.Camel.Engine.Tokens
 {
     public abstract class UnaryOperatorToken : OperatorToken
     {
-        protected abstract double Calculate(double a);
+        protected abstract decimal Calculate(decimal a);
 
         protected override int ArgCount => 1;
 
-        protected override double Calculate(double[] args)
+        protected override decimal Calculate(decimal[] args)
         {
             if (args.Length == ArgCount)
             {

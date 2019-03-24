@@ -11,16 +11,16 @@ namespace Lepecki.Playground.Camel.Engine.Test.Tokens
     public class SubtractOperatorTokenTest
     {
         [TestCase(3, 4, ExpectedResult = -1, TestOf = typeof(SubtractOperatorToken))]
-        public double OperatorShouldPushCorrectResultToStack(double a, double b)
+        public decimal OperatorShouldPushCorrectResultToStack(decimal a, decimal b)
         {
-            var stack = new Stack<double>();
+            var stack = new Stack<decimal>();
             stack.Push(a);
             stack.Push(b);
 
             var operatorToken = new SubtractOperatorToken();
             operatorToken.PushOrCalculate(stack);
 
-            return Math.Round(stack.Pop(), 8);
+            return stack.Pop();
         }
     }
 }

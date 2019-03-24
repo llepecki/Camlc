@@ -19,8 +19,8 @@ namespace Lepecki.Playground.Camel.Api.Controllers
 
         [HttpGet]
         [Route("")]
-        [ProducesResponseType(200, Type = typeof(double))]
-        public ActionResult<double> Get([FromQuery, Required, InfixExpr] string expr)
+        [ProducesResponseType(200, Type = typeof(decimal))]
+        public ActionResult<decimal> Get([FromQuery, Required, InfixExpr] string expr)
         {
             return _calc.Calculate(expr);
         }

@@ -4,6 +4,6 @@ namespace Lepecki.Playground.Camel.Engine.Tokens
 {
     public abstract class Token
     {
-        public abstract void PushOrCalculate(Stack<double> stack);
+        public abstract void PushOrCalculate(Stack<decimal> stack);
     }
 }

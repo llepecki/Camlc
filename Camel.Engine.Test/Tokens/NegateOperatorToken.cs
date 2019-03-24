@@ -11,15 +11,15 @@ namespace Lepecki.Playground.Camel.Engine.Test.Tokens
     public class NegateOperatorTokenTest
     {
         [TestCase(3, ExpectedResult = -3, TestOf = typeof(NegationOperatorToken))]
-        public double OperatorShouldPushCorrectResultToStack(double a)
+        public decimal OperatorShouldPushCorrectResultToStack(decimal a)
         {
-            var stack = new Stack<double>();
+            var stack = new Stack<decimal>();
             stack.Push(a);
 
             var operatorToken = new NegationOperatorToken();
             operatorToken.PushOrCalculate(stack);
 
-            return Math.Round(stack.Pop(), 8);
+            return stack.Pop();
         }
     }
 }

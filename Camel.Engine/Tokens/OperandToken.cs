@@ -5,14 +5,14 @@ namespace Lepecki.Playground.Camel.Engine.Tokens
 {
     public class OperandToken : Token
     {
-        private readonly double _value;
+        private readonly decimal _value;
 
-        public OperandToken(double value)
+        public OperandToken(decimal value)
         {
             _value = value;
         }
 
-        public override void PushOrCalculate(Stack<double> stack)
+        public override void PushOrCalculate(Stack<decimal> stack)
         {
             if (stack == null)
             {

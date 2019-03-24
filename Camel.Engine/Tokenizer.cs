@@ -11,7 +11,7 @@ namespace Lepecki.Playground.Camel.Engine
         {
             if (tokenDescriptor.IsOperand)
             {
-                return new OperandToken(Double.Parse(tokenDescriptor.ToString(), CultureInfo.InvariantCulture));
+                return new OperandToken(decimal.Parse(tokenDescriptor.ToString(), CultureInfo.InvariantCulture));
             }
 
             if (tokenDescriptor.IsOperator)
