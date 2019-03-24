@@ -1,4 +1,4 @@
-﻿using Lepecki.Playground.Camel.Api.Options;
+﻿using Lepecki.Playground.Camel.Api.Configuration;
 using Lepecki.Playground.Camel.Engine.Module;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -10,20 +10,8 @@ namespace Lepecki.Playground.Camel.Api
 {
     public class Startup
     {
-        private readonly RoutingConfigurator _routingConfigurator;
-        private readonly SwaggerConfigurator _swaggerConfigurator;
-
         public Startup(IConfiguration configuration)
         {
-            _routingConfigurator = new RoutingConfigurator();
-            
-            _swaggerConfigurator = new SwaggerConfigurator
-            {
-                Name = "Camel API",
-                Version = "v1",
-                Description = "Web calculator powered by Reverse Polish Notation"
-            };
-            
             Configuration = configuration;
         }
 
@@ -32,8 +20,8 @@ namespace Lepecki.Playground.Camel.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            services.AddRouting(_routingConfigurator.SetupRoutingOptions);
-            services.AddSwaggerGen(_swaggerConfigurator.SetupGenOptions);
+            services.AddRouting(StartupOptions.Routing.SetupRoutingOptions);
+            services.AddSwaggerGen(StartupOptions.Swagger.SetupGenOptions);
             services.AddEngine();
         }
 
@@ -51,7 +39,7 @@ namespace Lepecki.Playground.Camel.Api
             // app.UseHttpsRedirection();
             app.UseMvc();
             app.UseSwagger();
-            app.UseSwaggerUI(_swaggerConfigurator.SetupUiOptions);
+            app.UseSwaggerUI(StartupOptions.Swagger.SetupUiOptions);
         }
     }
 }

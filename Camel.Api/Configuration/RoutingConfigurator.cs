@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Routing;
 
-namespace Lepecki.Playground.Camel.Api.Options
+namespace Lepecki.Playground.Camel.Api.Configuration
 {
     public class RoutingConfigurator
     {
