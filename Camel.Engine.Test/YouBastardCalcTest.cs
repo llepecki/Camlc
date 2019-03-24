@@ -1,4 +1,3 @@
-using System;
 using Lepecki.Playground.Camel.Engine.Abstractions;
 using NUnit.Framework;
 
