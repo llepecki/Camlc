@@ -1,4 +1,4 @@
-# Camel
+# Camlc
 #### Web API that exposes implementation of a calculator powered by Reverse Polish Notation. Naming relates to "Pyramids" by Terry Pratchett and the greatest mathematician on The Disc.
 
 #### Useful links:
