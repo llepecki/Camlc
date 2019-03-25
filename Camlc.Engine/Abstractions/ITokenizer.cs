@@ -4,6 +4,6 @@ namespace Lepecki.Playground.Camlc.Engine.Abstractions
 {
     public interface ITokenizer
     {
-        Token Create(TokenDescriptor tokenDescriptor);
+        IToken Create(TokenDescriptor tokenDescriptor);
     }
 }

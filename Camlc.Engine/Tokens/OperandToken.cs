@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Lepecki.Playground.Camlc.Engine.Tokens
 {
-    public class OperandToken : Token
+    public class OperandToken : IToken
     {
         private readonly decimal _value;
 
@@ -12,7 +12,7 @@ namespace Lepecki.Playground.Camlc.Engine.Tokens
             _value = value;
         }
 
-        public override void PushOrCalculate(Stack<decimal> stack)
+        public void PushOrCalculate(Stack<decimal> stack)
         {
             if (stack == null)
             {

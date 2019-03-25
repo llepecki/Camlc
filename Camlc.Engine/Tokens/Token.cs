@@ -2,8 +2,8 @@ using System.Collections.Generic;
 
 namespace Lepecki.Playground.Camlc.Engine.Tokens
 {
-    public abstract class Token
+    public interface IToken
     {
-        public abstract void PushOrCalculate(Stack<decimal> stack);
+        void PushOrCalculate(Stack<decimal> stack);
     }
 }

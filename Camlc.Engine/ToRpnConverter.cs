@@ -26,7 +26,7 @@ namespace Lepecki.Playground.Camlc.Engine
         {
             IReadOnlyCollection<string> infixExpr = _exprSieve.Sieve(expr);
             IReadOnlyCollection<TokenDescriptor> postfixExpr = _infixToPostfixConverter.Convert(infixExpr);
-            IEnumerable<Token> tokens = postfixExpr.Select(_tokenizer.Create);
+            IEnumerable<IToken> tokens = postfixExpr.Select(_tokenizer.Create);
             return new RpnExpr(tokens);
         }
     }

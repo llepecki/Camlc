@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Lepecki.Playground.Camlc.Engine
 {
-    // etymology of this class' name can by found in "Pyramids" by Terry Pratchett
+    // Etymology of this class' name can by found in "Pyramids" by Terry Pratchett.
     public class YouBastardCalc : ICalc
     {
         private readonly IToRpnConverter _toRpnConverter;
@@ -21,7 +21,7 @@ namespace Lepecki.Playground.Camlc.Engine
 
             var stack = new Stack<decimal>();
 
-            foreach (Token token in rpnExpr)
+            foreach (IToken token in rpnExpr)
             {
                 token.PushOrCalculate(stack);
             }

@@ -6,11 +6,11 @@ using System.Linq;
 
 namespace Lepecki.Playground.Camlc.Engine
 {
-    public class RpnExpr : IEnumerable<Token>
+    public class RpnExpr : IEnumerable<IToken>
     {
-        private readonly Token[] _tokens;
+        private readonly IToken[] _tokens;
 
-        public RpnExpr(IEnumerable<Token> tokens)
+        public RpnExpr(IEnumerable<IToken> tokens)
         {
             if (tokens == null)
             {
@@ -20,7 +20,7 @@ namespace Lepecki.Playground.Camlc.Engine
             _tokens = tokens.ToArray();
         }
 
-        public IEnumerator<Token> GetEnumerator()
+        public IEnumerator<IToken> GetEnumerator()
         {
             return _tokens.AsEnumerable().GetEnumerator();
         }

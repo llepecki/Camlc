@@ -7,7 +7,7 @@ namespace Lepecki.Playground.Camlc.Engine
 {
     public class Tokenizer : ITokenizer
     {
-        public Token Create(TokenDescriptor tokenDescriptor)
+        public IToken Create(TokenDescriptor tokenDescriptor)
         {
             if (tokenDescriptor.IsOperand)
             {
