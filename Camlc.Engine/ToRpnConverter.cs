@@ -12,10 +12,7 @@ namespace Lepecki.Playground.Camlc.Engine
         private readonly IInfixToPostfixConverter _infixToPostfixConverter;
         private readonly ITokenizer _tokenizer;
 
-        public ToRpnConverter(
-            IExprSieve exprSieve,
-            IInfixToPostfixConverter infixToPostfixConverter,
-            ITokenizer tokenizer)
+        public ToRpnConverter(IExprSieve exprSieve, IInfixToPostfixConverter infixToPostfixConverter, ITokenizer tokenizer)
         {
             _exprSieve = exprSieve ?? throw new ArgumentNullException(nameof(exprSieve));
             _infixToPostfixConverter = infixToPostfixConverter ?? throw new ArgumentNullException(nameof(infixToPostfixConverter));

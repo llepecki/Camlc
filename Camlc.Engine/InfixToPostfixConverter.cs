@@ -16,62 +16,61 @@ namespace Lepecki.Playground.Camlc.Engine
 
         public IReadOnlyCollection<TokenDescriptor> Convert(IEnumerable<string> symbols)
         {
-            IEnumerable<TokenDescriptor> tokenDescriptors = symbols.Select(_tokenDescriptorFactory.Create);
-            IList<TokenDescriptor> tokenDescriptorsInPostfixOrder = new List<TokenDescriptor>();
+            IEnumerable<TokenDescriptor> descriptors = symbols.Select(_tokenDescriptorFactory.Create);
+            IList<TokenDescriptor> output = new List<TokenDescriptor>();
             var stack = new Stack<TokenDescriptor>();
 
-            foreach (TokenDescriptor tokenDescriptor in tokenDescriptors)
+            foreach (TokenDescriptor descriptor in descriptors)
             {
-                Process(tokenDescriptor, stack, tokenDescriptorsInPostfixOrder);
+                Advance(descriptor, stack, output);
             }
 
             while (stack.Count > 0)
             {
-                tokenDescriptorsInPostfixOrder.Add(stack.Pop());
+                output.Add(stack.Pop());
             }
 
-            return tokenDescriptorsInPostfixOrder.ToArray();
+            return output.ToArray();
         }
 
-        // consider moving this logic to TokenDescriptor and writing unit tests
-        private void Process(TokenDescriptor tokenDescriptor, Stack<TokenDescriptor> stack, IList<TokenDescriptor> tokenDescriptorsInPostfixOrder)
+        private static void Advance(TokenDescriptor descriptor, Stack<TokenDescriptor> stack, IList<TokenDescriptor> output)
         {
-            if (tokenDescriptor.IsOperand)
+            if (descriptor.IsOperand)
             {
-                tokenDescriptorsInPostfixOrder.Add(tokenDescriptor);
+                output.Add(descriptor);
             }
-            else if (tokenDescriptor.IsOperator)
+            else if (descriptor.IsOperator)
             {
                 if (stack.Count == 0 || stack.Peek().IsLeftParenthesis)
                 {
-                    stack.Push(tokenDescriptor);
+                    stack.Push(descriptor);
                 }
-                else if (tokenDescriptor.Precedence > stack.Peek().Precedence)
+                else if (descriptor.Precedence > stack.Peek().Precedence)
                 {
-                    stack.Push(tokenDescriptor);
+                    stack.Push(descriptor);
                 }
-                else if (tokenDescriptor.Precedence == stack.Peek().Precedence)
+                else if (descriptor.Precedence == stack.Peek().Precedence)
                 {
-                    tokenDescriptorsInPostfixOrder.Add(stack.Pop());
-                    stack.Push(tokenDescriptor);
+                    output.Add(stack.Pop());
+                    stack.Push(descriptor);
                 }
-                else if (tokenDescriptor.Precedence < stack.Peek().Precedence)
+                else if (descriptor.Precedence < stack.Peek().Precedence)
                 {
-                    tokenDescriptorsInPostfixOrder.Add(stack.Pop());
-                    Process(tokenDescriptor, stack, tokenDescriptorsInPostfixOrder);
+                    output.Add(stack.Pop());
+                    Advance(descriptor, stack, output);
                 }
             }
-            else if (tokenDescriptor.IsLeftParenthesis)
+            else if (descriptor.IsLeftParenthesis)
             {
-                stack.Push(tokenDescriptor);
+                stack.Push(descriptor);
             }
-            else if (tokenDescriptor.IsRightParenthesis)
+            else if (descriptor.IsRightParenthesis)
             {
-                var descriptor = stack.Pop();
+                descriptor = stack.Pop();
 
                 while (!descriptor.IsLeftParenthesis)
                 {
-                    tokenDescriptorsInPostfixOrder.Add(descriptor);
+                    output.Add(descriptor);
                     descriptor = stack.Pop();
                 }
             }
