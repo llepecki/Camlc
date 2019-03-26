@@ -4,7 +4,7 @@ namespace Lepecki.Playground.Camlc.Api.Configuration
 {
     public class RoutingConfigurator
     {
-        public void SetupRoutingOptions(RouteOptions options)
+        public void SetupRouting(RouteOptions options)
         {
             options.LowercaseUrls = true;
         }

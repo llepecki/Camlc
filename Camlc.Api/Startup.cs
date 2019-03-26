@@ -20,8 +20,9 @@ namespace Lepecki.Playground.Camlc.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            services.AddRouting(StartupOptions.Routing.SetupRoutingOptions);
-            services.AddSwaggerGen(StartupOptions.Swagger.SetupGenOptions);
+            services.AddRouting(StartupOptions.Routing.SetupRouting);
+            services.AddApiVersioning(StartupOptions.ApiVersioning.SetupApiVersioning);
+            services.AddSwaggerGen(StartupOptions.Swagger.SetupSwaggerGen);
             services.AddEngine();
         }
 
@@ -39,7 +40,7 @@ namespace Lepecki.Playground.Camlc.Api
             // app.UseHttpsRedirection();
             app.UseMvc();
             app.UseSwagger();
-            app.UseSwaggerUI(StartupOptions.Swagger.SetupUiOptions);
+            app.UseSwaggerUI(StartupOptions.Swagger.SetupSwaggerUi);
         }
     }
 }

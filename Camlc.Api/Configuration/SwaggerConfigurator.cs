@@ -3,25 +3,31 @@ using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Swashbuckle.AspNetCore.SwaggerUI;
+using System;
 
 namespace Lepecki.Playground.Camlc.Api.Configuration
 {
     public class SwaggerConfigurator
     {
-        public string Name { get; set; }
+        private readonly string _name;
+        private readonly string _version;
+        private readonly string _description;
 
-        public string Version { get; set; }
-
-        public string Description { get; set; }
-
-        public void SetupGenOptions(SwaggerGenOptions options)
+        public SwaggerConfigurator(string name, string description, Version version)
         {
-            options.SwaggerDoc(Version, new Info { Title = Name, Version = Version, Description = Description });
+            _name = name;
+            _description = description;
+            _version = $"v{version.ToString(2)}";
         }
 
-        public void SetupUiOptions(SwaggerUIOptions options)
+        public void SetupSwaggerGen(SwaggerGenOptions options)
         {
-            options.SwaggerEndpoint($"/swagger/{Version}/swagger.json", $"{Name} {Version}");
+            options.SwaggerDoc(_version, new Info { Title = _name, Version = _version, Description = _description });
+        }
+
+        public void SetupSwaggerUi(SwaggerUIOptions options)
+        {
+            options.SwaggerEndpoint($"/swagger/{_version}/swagger.json", $"{_name} {_version}");
             options.RoutePrefix = string.Empty;
         }
     }

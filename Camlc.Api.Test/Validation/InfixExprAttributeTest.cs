@@ -1,6 +1,5 @@
 using Lepecki.Playground.Camlc.Api.Validation;
 using NUnit.Framework;
-using System.ComponentModel.DataAnnotations;
 
 namespace Lepecki.Playground.Camlc.Api.Test.Validation
 {
