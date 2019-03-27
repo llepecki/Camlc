@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Lepecki.Playground.Camlc.Engine.Abstractions;
 
 namespace Lepecki.Playground.Camlc.Engine
 {

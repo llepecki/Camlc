@@ -7,7 +7,7 @@ namespace Lepecki.Playground.Camlc.Api.Configuration
     public class ApiVersioningConfigurator
     {
         private const string ApiVersionHeader = "Api-Version";
-        
+
         private readonly Version _version;
 
         public ApiVersioningConfigurator(Version version)
@@ -16,7 +16,7 @@ namespace Lepecki.Playground.Camlc.Api.Configuration
         }
 
         public void SetupApiVersioning(ApiVersioningOptions options)
-        {            
+        {
             options.ApiVersionReader = new HeaderApiVersionReader(ApiVersionHeader);
             options.AssumeDefaultVersionWhenUnspecified = true;
             options.DefaultApiVersion = new ApiVersion(_version.Major, _version.Minor);
