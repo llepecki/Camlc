@@ -5,10 +5,10 @@ using System.Collections.Generic;
 
 namespace Lepecki.Playground.Camlc.Engine.Test
 {
-    [TestFixture]
+    [TestFixture(TestOf = typeof(ExprSieve))]
     public class ExprSieveTest
     {
-        [Test(TestOf = typeof(ExprSieve)), TestCaseSource(typeof(ExprSieveTestCaseSource), nameof(ExprSieveTestCaseSource.TestCases))]
+        [TestCaseSource(typeof(ExprSieveTestCaseSource), nameof(ExprSieveTestCaseSource.TestCases))]
         public void SieveShouldReturnCollectionOfExpectedSymbols(string expr, IReadOnlyCollection<string> expected)
         {
             IExprSieve sieve = new ExprSieve();

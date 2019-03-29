@@ -4,10 +4,10 @@ using System.Collections.Generic;
 
 namespace Lepecki.Playground.Camlc.Engine.Test.Tokens
 {
-    [TestFixture]
+    [TestFixture(TestOf = typeof(DivideOperatorToken))]
     public class DivideOperatorTokenTest
     {
-        [TestCase(3, 4, ExpectedResult = 0.75, TestOf = typeof(DivideOperatorToken))]
+        [TestCase(3, 4, ExpectedResult = 0.75)]
         public decimal OperatorShouldPushCorrectResultToStack(decimal a, decimal b)
         {
             var stack = new Stack<decimal>();

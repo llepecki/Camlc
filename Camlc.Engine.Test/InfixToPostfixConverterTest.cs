@@ -6,10 +6,10 @@ using System.Linq;
 
 namespace Lepecki.Playground.Camlc.Engine.Test
 {
-    [TestFixture]
+    [TestFixture(TestOf = typeof(InfixToPostfixConverter))]
     public class InfixToPostfixConverterTest
     {
-        [Test(TestOf = typeof(InfixToPostfixConverter)), TestCaseSource(typeof(InfixToPostfixConverterTestCaseSource), nameof(InfixToPostfixConverterTestCaseSource.TestCases))]
+        [TestCaseSource(typeof(InfixToPostfixConverterTestCaseSource), nameof(InfixToPostfixConverterTestCaseSource.TestCases))]
         public void ConvertShouldReturnCollectionOfSymbolsWithoutParenthesisInPostfixNotationOrder(IReadOnlyCollection<string> symbols, IReadOnlyCollection<string> expected)
         {
             ITokenDescriptorFactory tokenDescriptorFactory = new TokenDescriptorFactory();

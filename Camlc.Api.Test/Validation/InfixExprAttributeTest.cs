@@ -3,11 +3,11 @@ using NUnit.Framework;
 
 namespace Lepecki.Playground.Camlc.Api.Test.Validation
 {
-    [TestFixture]
+    [TestFixture(TestOf = typeof(InfixExprAttribute))]
     public class InfixExprAttributeTest
     {
-        [TestCase(null, ExpectedResult = false, TestOf = typeof(InfixExprAttribute))]
-        [TestCase("", ExpectedResult = false, TestOf = typeof(InfixExprAttribute))]
+        [TestCase(null, ExpectedResult = false)]
+        [TestCase("", ExpectedResult = false)]
         public bool InfixExprAttributeShouldCorrectlyValidateExpr(string expr)
         {
             var attribute = new InfixExprAttribute();

@@ -3,11 +3,11 @@ using NUnit.Framework;
 
 namespace Lepecki.Playground.Camlc.Engine.Test
 {
-    [TestFixture]
+    [TestFixture(TestOf = typeof(TokenDescriptorFactory))]
     public class TokenizerDescriptorFactoryTest
     {
-        [TestCase("42", TestOf = typeof(TokenDescriptorFactory))]
-        [TestCase("7007.1001", TestOf = typeof(TokenDescriptorFactory))]
+        [TestCase("42")]
+        [TestCase("7007.1001")]
         public void CreateOperand(string symbol)
         {
             ITokenDescriptorFactory factory = new TokenDescriptorFactory();
@@ -20,12 +20,12 @@ namespace Lepecki.Playground.Camlc.Engine.Test
             Assert.AreEqual(0, tokenDescriptor.Precedence);
         }
 
-        [TestCase("ADD", 1, TestOf = typeof(TokenDescriptorFactory))]
-        [TestCase("SUB", 1, TestOf = typeof(TokenDescriptorFactory))]
-        [TestCase("MUL", 2, TestOf = typeof(TokenDescriptorFactory))]
-        [TestCase("DIV", 2, TestOf = typeof(TokenDescriptorFactory))]
-        [TestCase("POW", 3, TestOf = typeof(TokenDescriptorFactory))]
-        [TestCase("NEG", 4, TestOf = typeof(TokenDescriptorFactory))]
+        [TestCase("ADD", 1)]
+        [TestCase("SUB", 1)]
+        [TestCase("MUL", 2)]
+        [TestCase("DIV", 2)]
+        [TestCase("POW", 3)]
+        [TestCase("NEG", 4)]
         public void CreateOperator(string symbol, int expectedPriority)
         {
             ITokenDescriptorFactory factory = new TokenDescriptorFactory();
@@ -38,7 +38,7 @@ namespace Lepecki.Playground.Camlc.Engine.Test
             Assert.AreEqual(expectedPriority, tokenDescriptor.Precedence);
         }
 
-        [Test(TestOf = typeof(TokenDescriptorFactory))]
+        [Test]
         public void CreateLeftParenthesis()
         {
             ITokenDescriptorFactory factory = new TokenDescriptorFactory();
@@ -51,7 +51,7 @@ namespace Lepecki.Playground.Camlc.Engine.Test
             Assert.AreEqual(5, tokenDescriptor.Precedence);
         }
 
-        [Test(TestOf = typeof(TokenDescriptorFactory))]
+        [Test]
         public void CreateRightParenthesis()
         {
             ITokenDescriptorFactory factory = new TokenDescriptorFactory();

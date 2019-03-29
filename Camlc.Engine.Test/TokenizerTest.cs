@@ -5,17 +5,17 @@ using System;
 
 namespace Lepecki.Playground.Camlc.Engine.Test
 {
-    [TestFixture]
+    [TestFixture(TestOf = typeof(Tokenizer))]
     public class TokenizerTest
     {
-        [TestCase("42", ExpectedResult = typeof(OperandToken), TestOf = typeof(Tokenizer))]
-        [TestCase("42.789", ExpectedResult = typeof(OperandToken), TestOf = typeof(Tokenizer))]
-        [TestCase("ADD", ExpectedResult = typeof(AddOperatorToken), TestOf = typeof(Tokenizer))]
-        [TestCase("SUB", ExpectedResult = typeof(SubtractOperatorToken), TestOf = typeof(Tokenizer))]
-        [TestCase("MUL", ExpectedResult = typeof(MultiplyOperatorToken), TestOf = typeof(Tokenizer))]
-        [TestCase("DIV", ExpectedResult = typeof(DivideOperatorToken), TestOf = typeof(Tokenizer))]
-        [TestCase("POW", ExpectedResult = typeof(PowerOperatorToken), TestOf = typeof(Tokenizer))]
-        [TestCase("NEG", ExpectedResult = typeof(NegationOperatorToken), TestOf = typeof(Tokenizer))]
+        [TestCase("42", ExpectedResult = typeof(OperandToken))]
+        [TestCase("42.789", ExpectedResult = typeof(OperandToken))]
+        [TestCase("ADD", ExpectedResult = typeof(AddOperatorToken))]
+        [TestCase("SUB", ExpectedResult = typeof(SubtractOperatorToken))]
+        [TestCase("MUL", ExpectedResult = typeof(MultiplyOperatorToken))]
+        [TestCase("DIV", ExpectedResult = typeof(DivideOperatorToken))]
+        [TestCase("POW", ExpectedResult = typeof(PowerOperatorToken))]
+        [TestCase("NEG", ExpectedResult = typeof(NegationOperatorToken))]
         public Type TokenizerShouldCreateTokenCorrespondingToItsStringRepresentation(string symbol)
         {
             ITokenizer tokenizer = new Tokenizer();
