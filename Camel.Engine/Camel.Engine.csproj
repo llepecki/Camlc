@@ -1,9 +1,0 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyName>Lepecki.Playground.Camel.Engine</AssemblyName>
-    <RootNamespace>Lepecki.Playground.Camel.Engine</RootNamespace>
-  </PropertyGroup>
-
-</Project>
