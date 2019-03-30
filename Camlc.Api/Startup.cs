@@ -40,7 +40,7 @@ namespace Lepecki.Playground.Camlc.Api
             // app.UseHttpsRedirection();
             app.UseMvc();
             app.UseSwagger();
-            app.UseSwaggerUI(StartupOptions.Swagger.SetupSwaggerUi);
+            app.UseSwaggerUI(StartupOptions.Swagger.GetSwaggerUiConfigurator(env));
         }
     }
 }

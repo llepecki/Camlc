@@ -1,4 +1,5 @@
-﻿using Lepecki.Playground.Camlc.Api.Validation;
+﻿using Lepecki.Playground.Camlc.Api.Filters;
+using Lepecki.Playground.Camlc.Api.Validation;
 using Lepecki.Playground.Camlc.Engine.Abstractions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -19,6 +20,7 @@ namespace Lepecki.Playground.Camlc.Api.Controllers
 
         [HttpGet]
         [Route("")]
+        [NormalizeQueryParams]
         [ProducesResponseType(typeof(decimal), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
         public ActionResult<decimal> Calculate([FromQuery, InfixExpr] string expr)

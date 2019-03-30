@@ -1,28 +1,24 @@
 using Lepecki.Playground.Camlc.Engine.Abstractions;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace Lepecki.Playground.Camlc.Engine
 {
     public class ExprSieve : IExprSieve
     {
-        private static readonly Regex TokenRegex = new Regex(Patterns.AnyToken, RegexOptions.IgnoreCase);
+        private static readonly Regex AnyToken = new Regex(@"(ADD|SUB|MUL|DIV|POW|MIN|MAX|NEG|\d+(.\d+)?|\(|\))", RegexOptions.Singleline);
 
         public IReadOnlyCollection<string> Sieve(string expr)
         {
-            Match match = TokenRegex.Match(expr);
-            return IdentifySymbols(match).ToArray();
-        }
+            MatchCollection matches = AnyToken.Matches(expr);
+            var symbols = new string[matches.Count];
 
-        private IEnumerable<string> IdentifySymbols(Match match)
-        {
-            while (match.Success)
+            for (int i = 0; i < matches.Count; i++)
             {
-                string exprComponent = match.Value.Trim().ToUpperInvariant();
-                match = match.NextMatch();
-                yield return exprComponent;
+                symbols[i] = matches[i].Value;
             }
+
+            return symbols;
         }
     }
 }

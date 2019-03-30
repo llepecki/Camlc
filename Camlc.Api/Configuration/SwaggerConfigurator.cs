@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Hosting;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Swashbuckle.AspNetCore.SwaggerUI;
@@ -25,10 +26,15 @@ namespace Lepecki.Playground.Camlc.Api.Configuration
             options.SwaggerDoc(_version, new Info { Title = _name, Version = _version, Description = _description });
         }
 
-        public void SetupSwaggerUi(SwaggerUIOptions options)
+        public Action<SwaggerUIOptions> GetSwaggerUiConfigurator(IHostingEnvironment env)
         {
-            options.SwaggerEndpoint($"/swagger/{_version}/swagger.json", $"{_name} {_version}");
-            options.RoutePrefix = string.Empty;
+            string suffix = env.IsProduction() ? string.Empty : env.EnvironmentName;
+
+            return options =>
+            {
+                options.SwaggerEndpoint($"/swagger/{_version}/swagger.json", $"{_name} {_version}{suffix}");
+                options.RoutePrefix = string.Empty;
+            };
         }
     }
 }

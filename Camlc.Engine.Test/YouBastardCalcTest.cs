@@ -6,10 +6,10 @@ namespace Lepecki.Playground.Camlc.Engine.Test
     [TestFixture(TestOf = typeof(YouBastardCalc))]
     public class YouBastardCalcTests
     {
-        [TestCase("3 mul 4 div 2", ExpectedResult = 6.0000)]
-        [TestCase("3 add 4.2 mul 5.5 div 6", ExpectedResult = 6.8500)]
-        [TestCase("(300 add 23.05) mul (43.3 sub 21) div (84 add 7)", ExpectedResult = 79.1650)]
-        [TestCase("(4000.03 add 8) mul (6.5 sub 5) div ((3 sub 2) mul (4 add 2))", ExpectedResult = 1002.0075)]
+        [TestCase("3MUL4DIV2", ExpectedResult = 6.0000)]
+        [TestCase("3ADD4.2MUL5.5DIV6", ExpectedResult = 6.8500)]
+        [TestCase("(300ADD23.05)MUL(43.3SUB21)DIV(84ADD7)", ExpectedResult = 79.1650)]
+        [TestCase("(4000.03ADD8)MUL(6.5SUB5)DIV((3SUB2)MUL(4ADD2))", ExpectedResult = 1002.0075)]
         public decimal CalculateShouldReturnExpectedResult(string expr)
         {
             IExprSieve exprSieve = new ExprSieve();

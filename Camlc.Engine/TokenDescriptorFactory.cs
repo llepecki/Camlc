@@ -6,11 +6,11 @@ namespace Lepecki.Playground.Camlc.Engine
 {
     public class TokenDescriptorFactory : ITokenDescriptorFactory
     {
-        private static readonly Regex OperandRegex = new Regex(Patterns.Decimal);
+        private static readonly Regex Decimal = new Regex(@"^\d+(.\d+)?$", RegexOptions.Singleline);
 
         public TokenDescriptor Create(string symbol)
         {
-            if (OperandRegex.IsMatch(symbol))
+            if (Decimal.IsMatch(symbol))
             {
                 return new TokenDescriptor(symbol, true, false, false, false, 0);
             }
