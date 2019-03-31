@@ -20,7 +20,7 @@ namespace Lepecki.Playground.Camlc.Engine.Test
         {
             ITokenizer tokenizer = new Tokenizer();
             ITokenDescriptorFactory tokenDescriptorFactory = new TokenDescriptorFactory();
-            IToken token = tokenizer.Create(tokenDescriptorFactory.Create(symbol));
+            Token token = tokenizer.Create(tokenDescriptorFactory.Create(symbol));
             return token.GetType();
         }
     }

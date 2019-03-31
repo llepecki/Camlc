@@ -21,9 +21,9 @@ namespace Lepecki.Playground.Camlc.Api.Configuration
             _version = $"v{version.ToString(2)}";
         }
 
-        public void SetupSwaggerGen(SwaggerGenOptions options)
+        public Action<SwaggerGenOptions> GetSwaggerGenConfigurator()
         {
-            options.SwaggerDoc(_version, new Info { Title = _name, Version = _version, Description = _description });
+            return options => options.SwaggerDoc(_version, new Info { Title = _name, Version = _version, Description = _description });
         }
 
         public Action<SwaggerUIOptions> GetSwaggerUiConfigurator(IHostingEnvironment env)

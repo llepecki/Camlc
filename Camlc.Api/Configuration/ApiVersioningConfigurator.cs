@@ -15,12 +15,15 @@ namespace Lepecki.Playground.Camlc.Api.Configuration
             _version = version ?? throw new ArgumentNullException(nameof(version));
         }
 
-        public void SetupApiVersioning(ApiVersioningOptions options)
+        public Action<ApiVersioningOptions> GetApiVersioningConfigurator()
         {
-            options.ApiVersionReader = new HeaderApiVersionReader(ApiVersionHeader);
-            options.AssumeDefaultVersionWhenUnspecified = true;
-            options.DefaultApiVersion = new ApiVersion(_version.Major, _version.Minor);
-            options.ReportApiVersions = true;
+            return options =>
+            {
+                options.ApiVersionReader = new HeaderApiVersionReader(ApiVersionHeader);
+                options.AssumeDefaultVersionWhenUnspecified = true;
+                options.DefaultApiVersion = new ApiVersion(_version.Major, _version.Minor);
+                options.ReportApiVersions = true;
+            };
         }
     }
 }

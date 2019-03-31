@@ -2,6 +2,8 @@ using Lepecki.Playground.Camlc.Engine.Abstractions;
 using Lepecki.Playground.Camlc.Engine.Tokens;
 using System;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Lepecki.Playground.Camlc.Engine
 {
@@ -21,9 +23,23 @@ namespace Lepecki.Playground.Camlc.Engine
 
             var stack = new Stack<decimal>();
 
-            foreach (IToken token in rpnExpr)
+            foreach (Token token in rpnExpr)
             {
                 token.PushOrCalculate(stack);
+            }
+
+            return stack.Pop();
+        }
+
+        public async Task<decimal> CalculateAsync(string expr, CancellationToken cancellationToken)
+        {
+            RpnExpr rpnExpr = await _toRpnConverter.ConvertAsync(expr, cancellationToken);
+
+            var stack = new Stack<decimal>();
+
+            foreach (Token token in rpnExpr)
+            {
+                await token.PushOrCalculateAsync(stack, cancellationToken);
             }
 
             return stack.Pop();

@@ -7,12 +7,15 @@ namespace Lepecki.Playground.Camlc.Api.Configuration
     {
         static StartupOptions()
         {
-            Version version = Assembly.GetAssembly(typeof(Startup)).GetName().Version;
+            Version version = Assembly.GetAssembly(typeof(StartupOptions)).GetName().Version;
 
+            Mvc = new MvcConfigurator();
             Routing = new RoutingConfigurator();
             ApiVersioning = new ApiVersioningConfigurator(version);
             Swagger = new SwaggerConfigurator("Camlc API", "Web calculator powered by Reverse Polish Notation", version);
         }
+        
+        public static MvcConfigurator Mvc { get; }
 
         public static RoutingConfigurator Routing { get; }
 

@@ -4,6 +4,8 @@ using Lepecki.Playground.Camlc.Engine.Abstractions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Lepecki.Playground.Camlc.Api.Controllers
 {
@@ -25,11 +27,10 @@ namespace Lepecki.Playground.Camlc.Api.Controllers
         [NormalizeQueryParam(ExprQueryParamName)]
         [CacheResultForQueryParam(ExprQueryParamName)]
         [ProducesResponseType(typeof(decimal), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(decimal), StatusCodes.Status304NotModified)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
-        public ActionResult<decimal> Calculate([FromQuery, InfixExpr] string expr) dodac cancellationtoken, w ICalc dodaprzeladowanie, ktore przyjmuje token, dodac opoznienie w petli i zobaczyc jak dziala cacheowanie
+        public async Task<ActionResult<decimal>> Calculate([FromQuery, InfixExpr] string expr, CancellationToken cancellationToken)
         {
-            return _calc.Calculate(expr);
+            return await _calc.CalculateAsync(expr, cancellationToken);
         }
     }
 }

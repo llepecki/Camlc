@@ -1,4 +1,5 @@
 ﻿using Lepecki.Playground.Camlc.Api.Configuration;
+using Lepecki.Playground.Camlc.Api.Filters;
 using Lepecki.Playground.Camlc.Engine.Module;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -19,10 +20,10 @@ namespace Lepecki.Playground.Camlc.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            services.AddRouting(StartupOptions.Routing.SetupRouting);
-            services.AddApiVersioning(StartupOptions.ApiVersioning.SetupApiVersioning);
-            services.AddSwaggerGen(StartupOptions.Swagger.SetupSwaggerGen);
+            services.AddMvc(StartupOptions.Mvc.GetMvcConfiguratior()).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);;
+            services.AddRouting(StartupOptions.Routing.GetRoutingConfigurator());
+            services.AddApiVersioning(StartupOptions.ApiVersioning.GetApiVersioningConfigurator());
+            services.AddSwaggerGen(StartupOptions.Swagger.GetSwaggerGenConfigurator());
             services.AddMemoryCache();
             services.AddEngine();
         }

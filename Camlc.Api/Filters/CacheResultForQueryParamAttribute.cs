@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Primitives;
 using System;
 using System.Globalization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Primitives;
 
 namespace Lepecki.Playground.Camlc.Api.Filters
 {
@@ -18,59 +18,6 @@ namespace Lepecki.Playground.Camlc.Api.Filters
             
             _paramName = paramName;
         }
-
-//        public override void OnActionExecuted(ActionExecutedContext context)
-//        {
-//            if (context.Result is ObjectResult result)
-//            {
-//                decimal value = (decimal) result.Value;
-//                
-//                IMemoryCache cache = GetCache(context);
-//
-//                cache.Set(context.HttpContext.Request.Query[_paramName][0], value);
-//            }
-//            
-//            base.OnActionExecuted(context);
-//        }
-//
-//        public override void OnActionExecuting(ActionExecutingContext context)
-//        {
-//            if (context.HttpContext.Request.Query.ContainsKey(_paramName));
-//            {
-//                StringValues values = context.HttpContext.Request.Query[_paramName];
-//
-//                if (values.Count == 1)
-//                {
-//                    var cache = GetCache(context);
-//
-//                    if (cache.TryGetValue(values[0], out decimal result))
-//                    {
-//                        var contentResult = new ContentResult
-//                        {
-//                            StatusCode = 200,
-//                            Content = result.ToString(CultureInfo.InvariantCulture)
-//                        };
-//
-//                        context.HttpContext.Response.Headers.Add("From-Cache", result.ToString(CultureInfo.InvariantCulture));
-//                        context.Result = contentResult;
-//                    }
-//                }
-//            }
-//            
-//            base.OnActionExecuting(context);
-//        }
-//
-//        public override void OnResultExecuting(ResultExecutingContext context)
-//        {
-//            var result = context.Result;
-//            
-//            base.OnResultExecuting(context);
-//        }
-//
-//        public override void OnResultExecuted(ResultExecutedContext context)
-//        {           
-//            base.OnResultExecuted(context);
-//        }
 
         public void OnResourceExecuting(ResourceExecutingContext context)
         {
@@ -90,8 +37,8 @@ namespace Lepecki.Playground.Camlc.Api.Filters
                             Content = result.ToString(CultureInfo.InvariantCulture)
                         };
 
-                        context.HttpContext.Response.Headers.Add("From-Cache", result.ToString(CultureInfo.InvariantCulture));
-                        context.Result = new OkResult();
+                        context.HttpContext.Response.Headers.Add("From-Cache", string.Empty);
+                        context.Result = contentResult;
                     }
                 }
             }
