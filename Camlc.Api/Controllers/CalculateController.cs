@@ -11,6 +11,8 @@ namespace Lepecki.Playground.Camlc.Api.Controllers
     [Route("api/[controller]")]
     public class CalculateController : ControllerBase
     {
+        private const string ExprQueryParamName = "expr";
+        
         private readonly ICalc _calc;
 
         public CalculateController(ICalc calc)
@@ -20,10 +22,12 @@ namespace Lepecki.Playground.Camlc.Api.Controllers
 
         [HttpGet]
         [Route("")]
-        [NormalizeQueryParams]
+        [NormalizeQueryParam(ExprQueryParamName)]
+        [CacheResultForQueryParam(ExprQueryParamName)]
         [ProducesResponseType(typeof(decimal), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(decimal), StatusCodes.Status304NotModified)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
-        public ActionResult<decimal> Calculate([FromQuery, InfixExpr] string expr)
+        public ActionResult<decimal> Calculate([FromQuery, InfixExpr] string expr) dodac cancellationtoken, w ICalc dodaprzeladowanie, ktore przyjmuje token, dodac opoznienie w petli i zobaczyc jak dziala cacheowanie
         {
             return _calc.Calculate(expr);
         }

@@ -23,6 +23,7 @@ namespace Lepecki.Playground.Camlc.Api
             services.AddRouting(StartupOptions.Routing.SetupRouting);
             services.AddApiVersioning(StartupOptions.ApiVersioning.SetupApiVersioning);
             services.AddSwaggerGen(StartupOptions.Swagger.SetupSwaggerGen);
+            services.AddMemoryCache();
             services.AddEngine();
         }
 

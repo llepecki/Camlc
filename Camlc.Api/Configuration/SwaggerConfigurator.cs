@@ -32,7 +32,7 @@ namespace Lepecki.Playground.Camlc.Api.Configuration
 
             return options =>
             {
-                options.SwaggerEndpoint($"/swagger/{_version}/swagger.json", $"{_name} {_version}{suffix}");
+                options.SwaggerEndpoint($"/swagger/{_version}/swagger.json", $"{_name} {_version} {suffix}".Trim());
                 options.RoutePrefix = string.Empty;
             };
         }
