@@ -1,29 +1,31 @@
 ﻿using Lepecki.Playground.Camlc.Api.Configuration;
-using Lepecki.Playground.Camlc.Api.Filters;
 using Lepecki.Playground.Camlc.Engine.Module;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace Lepecki.Playground.Camlc.Api
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private readonly IStartupOptions _startupOptions;
+        private readonly IConfiguration _configuration;
+        
+        public Startup(IStartupOptions startupOptions, IConfiguration configuration)
         {
-            Configuration = configuration;
+            _startupOptions = startupOptions ?? throw new ArgumentNullException(nameof(startupOptions));
+            _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
         }
-
-        public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc(StartupOptions.Mvc.GetMvcConfiguratior()).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);;
-            services.AddRouting(StartupOptions.Routing.GetRoutingConfigurator());
-            services.AddApiVersioning(StartupOptions.ApiVersioning.GetApiVersioningConfigurator());
-            services.AddSwaggerGen(StartupOptions.Swagger.GetSwaggerGenConfigurator());
+            services.AddMvc(_startupOptions.Configure).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddRouting(_startupOptions.Configure);
+            services.AddApiVersioning(_startupOptions.Configure);
+            services.AddSwaggerGen(_startupOptions.Configure);
             services.AddMemoryCache();
             services.AddEngine();
         }
@@ -42,7 +44,7 @@ namespace Lepecki.Playground.Camlc.Api
             // app.UseHttpsRedirection();
             app.UseMvc();
             app.UseSwagger();
-            app.UseSwaggerUI(StartupOptions.Swagger.GetSwaggerUiConfigurator(env));
+            app.UseSwaggerUI(_startupOptions.Configure);
         }
     }
 }

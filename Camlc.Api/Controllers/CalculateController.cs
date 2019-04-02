@@ -30,6 +30,8 @@ namespace Lepecki.Playground.Camlc.Api.Controllers
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<decimal>> Calculate([FromQuery, InfixExpr] string expr, CancellationToken cancellationToken)
         {
+            // ZMIENIĆ expr na expr[]
+            // w outputowym JSONie zrobić (2 ADD 3) MUL 5 = 4, czyli dodać spacje naokoło operatorów
             return await _calc.CalculateAsync(expr, cancellationToken);
         }
     }

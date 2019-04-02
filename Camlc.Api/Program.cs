@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore;
+﻿using Lepecki.Playground.Camlc.Api.Configuration;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Lepecki.Playground.Camlc.Api
 {
@@ -12,6 +14,7 @@ namespace Lepecki.Playground.Camlc.Api
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
+                .UseStartup<Startup>()
+                .ConfigureServices(services => services.AddTransient<IStartupOptions, StartupOptions>());
     }
 }
