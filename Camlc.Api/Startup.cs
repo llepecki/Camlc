@@ -13,7 +13,7 @@ namespace Lepecki.Playground.Camlc.Api
     {
         private readonly IStartupOptions _startupOptions;
         private readonly IConfiguration _configuration;
-        
+
         public Startup(IStartupOptions startupOptions, IConfiguration configuration)
         {
             _startupOptions = startupOptions ?? throw new ArgumentNullException(nameof(startupOptions));

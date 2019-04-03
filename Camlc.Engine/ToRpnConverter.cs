@@ -28,7 +28,7 @@ namespace Lepecki.Playground.Camlc.Engine
             IEnumerable<Token> tokens = postfixExpr.Select(_tokenizer.Create);
             return new RpnExpr(tokens);
         }
-        
+
         public async Task<RpnExpr> ConvertAsync(string expr, CancellationToken cancellationToken)
         {
             IReadOnlyCollection<string> infixExpr = await _exprSieve.SieveAsync(expr, cancellationToken);

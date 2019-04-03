@@ -12,13 +12,13 @@ namespace Lepecki.Playground.Camlc.Api.Filters
     public class NormalizeQueryParamAttribute : Attribute, IResourceFilter
     {
         private static readonly Regex WhiteSpaceRegex = new Regex(@"\s+");
-        
+
         private readonly string _paramName;
 
         public NormalizeQueryParamAttribute(string paramName)
         {
             if (string.IsNullOrWhiteSpace(paramName)) throw new ArgumentNullException(nameof(paramName));
-            
+
             _paramName = paramName;
         }
 
@@ -35,25 +35,25 @@ namespace Lepecki.Playground.Camlc.Api.Filters
         {
         }
 
-        private static string GetKey(KeyValuePair<string, StringValues> param)
-        {
-            return param.Key;
-        }
-
         public bool RemoveWhiteSpaces { get; set; } = true;
 
         public bool ToUpperInvariant { get; set; } = true;
 
+        private string GetKey(KeyValuePair<string, StringValues> param)
+        {
+            return param.Key.Equals(_paramName, StringComparison.OrdinalIgnoreCase) ? _paramName : param.Key;
+        }
+
         private StringValues GetValue(KeyValuePair<string, StringValues> param)
         {
-            var values = new string[param.Value.Count];
-
-            for (int i = 0; i < values.Length; i++)
+            if (param.Key.Equals(_paramName, StringComparison.OrdinalIgnoreCase))
             {
-                values[i] = param.Value[i];
+                var values = new string[param.Value.Count];
 
-                if (param.Key.Equals(_paramName))
+                for (int i = 0; i < values.Length; i++)
                 {
+                    values[i] = param.Value[i];
+
                     if (RemoveWhiteSpaces)
                     {
                         values[i] = WhiteSpaceRegex.Replace(values[i], string.Empty);
@@ -64,9 +64,11 @@ namespace Lepecki.Playground.Camlc.Api.Filters
                         values[i] = values[i].ToUpperInvariant();
                     }
                 }
+
+                return new StringValues(values);
             }
 
-            return new StringValues(values);
+            return param.Value;
         }
     }
 }

@@ -21,7 +21,7 @@ namespace Lepecki.Playground.Camlc.Api.Configuration
         private readonly string _description;
         private readonly string _environmentName;
         private readonly bool _isProduction;
-        
+
         public StartupOptions(IHostingEnvironment environment)
         {
             Version semVersion = Assembly.GetAssembly(typeof(StartupOptions)).GetName().Version;
@@ -32,12 +32,6 @@ namespace Lepecki.Playground.Camlc.Api.Configuration
             _description = "Web calculator powered by Reverse Polish Notation";
             _environmentName = environment.EnvironmentName;
             _isProduction = environment.IsProduction();
-
-            // ApiVersioningConfigurator = CreateApiVersioningConfigurator(semVersion);
-            // MvcConfigurator = CreateMvcConfigurator();
-            // RoutingConfigurator = CreateRoutingConfigurator();
-            // SwaggerGenConfigurator = CreateSwaggerGenConfigurator(name, version, description);
-            // SwaggerUiConfigurator = CreateSwaggerUiConfigurator(name, version, environment.IsProduction(), environment.EnvironmentName);
         }
 
         public void Configure(ApiVersioningOptions options)
@@ -50,7 +44,11 @@ namespace Lepecki.Playground.Camlc.Api.Configuration
 
         public void Configure(MvcOptions options)
         {
-            // TODO: add environment headers on stage and prod
+            if (!_isProduction)
+            {
+                options.Filters.Add(new IncludeEnvironmentHeaderFilter(_environmentName));
+            }
+
             options.Filters.Add(typeof(TaskCanceledExceptionFilter));
         }
 
@@ -72,62 +70,9 @@ namespace Lepecki.Playground.Camlc.Api.Configuration
         public void Configure(SwaggerUIOptions options)
         {
             string suffix = _isProduction ? string.Empty : _environmentName;
-            
+
             options.SwaggerEndpoint($"/swagger/{_version}/swagger.json", $"{_name} {_version} {suffix}".Trim());
             options.RoutePrefix = string.Empty;
         }
-
-        // public Action<ApiVersioningOptions> ApiVersioningConfigurator { get; }
-        // 
-        // public Action<MvcOptions> MvcConfigurator { get; }
-        // 
-        // public Action<RouteOptions> RoutingConfigurator { get; }
-        // 
-        // public Action<SwaggerGenOptions> SwaggerGenConfigurator { get; }
-        // 
-        // public Action<SwaggerUIOptions> SwaggerUiConfigurator { get; }
-// 
-        // private Action<ApiVersioningOptions> CreateApiVersioningConfigurator(Version version)
-        // {
-        //     return options =>
-        //     {
-        //         options.ApiVersionReader = new HeaderApiVersionReader("Api-Version");
-        //         options.AssumeDefaultVersionWhenUnspecified = true;
-        //         options.DefaultApiVersion = new ApiVersion(version.Major, version.Minor);
-        //         options.ReportApiVersions = true;
-        //     };
-        // }
-        // 
-        // private Action<MvcOptions> CreateMvcConfigurator()
-        // {
-        //     // TODO: add environment headers on stage and prod
-        //     return options =>  options.Filters.Add(typeof(TaskCanceledExceptionFilter));
-        // }
-        // 
-        // private Action<RouteOptions> CreateRoutingConfigurator()
-        // {
-        //     return options =>  options.LowercaseUrls = true;
-        // }
-        // 
-        // private Action<SwaggerGenOptions> CreateSwaggerGenConfigurator(string name, string version, string description)
-        // {
-        //     return options => options.SwaggerDoc(version, new Info
-        //     {
-        //         Title = name,
-        //         Version = version,
-        //         Description = description
-        //     });
-        // }
-        // 
-        // private Action<SwaggerUIOptions> CreateSwaggerUiConfigurator(string name, string version, bool isProduction, string environmentName)
-        // {
-        //     string suffix = isProduction ? string.Empty : environmentName;
-// 
-        //     return options =>
-        //     {
-        //         options.SwaggerEndpoint($"/swagger/{version}/swagger.json", $"{name} {version} {suffix}".Trim());
-        //         options.RoutePrefix = string.Empty;
-        //     };
-        // }
     }
 }

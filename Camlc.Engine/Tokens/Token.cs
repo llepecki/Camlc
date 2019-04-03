@@ -13,7 +13,7 @@ namespace Lepecki.Playground.Camlc.Engine.Tokens
             cancellationToken.ThrowIfCancellationRequested();
 
             PushOrCalculate(stack);
-            
+
             return Task.CompletedTask;
         }
     }

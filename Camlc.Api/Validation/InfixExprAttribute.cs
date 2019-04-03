@@ -22,12 +22,19 @@ namespace Lepecki.Playground.Camlc.Api.Validation
                 return initialValidationResult;
             }
 
-            string expr = (string)value;
-            int expectedLength = AnyToken.Matches(expr).Sum(match => match.Length);
+            string[] expr = (string[])value;
 
-            return expr.Length != expectedLength ?
-                new ValidationResult("Unrecognized symbol(s) found") :
-                ValidationResult.Success;
+            foreach (string e in expr) // TODO: naming
+            {
+                int expectedLength = AnyToken.Matches(e).Sum(match => match.Length);
+
+                if (e.Length != expectedLength)
+                {
+                    return new ValidationResult("Unrecognized symbol(s) found");
+                }
+            }
+
+            return ValidationResult.Success;
         }
     }
 }

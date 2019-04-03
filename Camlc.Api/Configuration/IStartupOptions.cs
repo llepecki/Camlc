@@ -13,14 +13,5 @@ namespace Lepecki.Playground.Camlc.Api.Configuration
         IConfigurator<SwaggerGenOptions>,
         IConfigurator<SwaggerUIOptions>
     {
-        // Action<ApiVersioningOptions> ApiVersioningConfigurator { get; }
-        // 
-        // Action<MvcOptions> MvcConfigurator { get; }
-        // 
-        // Action<RouteOptions> RoutingConfigurator { get; }
-        // 
-        // Action<SwaggerGenOptions> SwaggerGenConfigurator { get; }
-        // 
-        // Action<SwaggerUIOptions> SwaggerUiConfigurator { get; }
     }
 }

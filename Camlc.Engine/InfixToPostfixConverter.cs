@@ -33,7 +33,7 @@ namespace Lepecki.Playground.Camlc.Engine
         public Task<IReadOnlyCollection<TokenDescriptor>> ConvertAsync(IEnumerable<string> symbols, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
-            
+
             return Task.FromResult(Convert(symbols));
         }
 

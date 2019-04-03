@@ -14,7 +14,7 @@ namespace Lepecki.Playground.Camlc.Api.Filters
                 {
                     context.ExceptionHandled = true;
                     context.Result = new NoContentResult();
-                }                
+                }
             }
         }
     }
