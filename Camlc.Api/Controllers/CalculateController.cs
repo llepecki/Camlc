@@ -4,9 +4,7 @@ using Lepecki.Playground.Camlc.Api.Validation;
 using Lepecki.Playground.Camlc.Engine.Abstractions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Memory;
 using System;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -32,10 +30,10 @@ namespace Lepecki.Playground.Camlc.Api.Controllers
         [CacheResultForQueryParam(ExprQueryParamName, CachedExprResultsKey)]
         [ProducesResponseType(typeof(ExprResult[]), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
-        // TODO: output formatters for xml, json, csv
-        public async Task<ActionResult<ExprResult[]>> Calculate([FromQuery, InfixExpr] string[] expr, CancellationToken cancellationToken)
+        // TODO: output formatters for xml, json, csv; move this controller to v1.1 (or v2) and create old one with single expr, use versioning
+        public async Task<ActionResult<ExprResult[]>> Calculate([FromQuery, InfixMultiExpr] string[] expr, CancellationToken cancellationToken)
         {
-            // w outputowym JSONie zrobić (2 ADD 3) MUL 5 = 4, czyli dodać spacje naokoło operatorów
+            // TODO: human readable output (2ADDNEG3) -> (2 ADD NEG 3)
 
             var calculations = new Task<decimal>[expr.Length];
 

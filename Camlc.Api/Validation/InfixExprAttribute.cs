@@ -1,40 +1,22 @@
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text.RegularExpressions;
 
 namespace Lepecki.Playground.Camlc.Api.Validation
 {
-    public class InfixExprAttribute : RequiredAttribute
+    public class InfixExprAttribute : InfixExprAttributeBase
     {
-        private static readonly Regex AnyToken = new Regex(@"(ADD|SUB|MUL|DIV|POW|MIN|MAX|NEG|\d+(.\d+)?|\(|\))", RegexOptions.Singleline);
-
-        public InfixExprAttribute()
+        protected override ValidationResult ValidateInfixExpr(object value)
         {
-            ErrorMessage = "Value is required";
-        }
-
-        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
-        {
-            ValidationResult initialValidationResult = base.IsValid(value, validationContext);
-
-            if (initialValidationResult != ValidationResult.Success)
+            if (value is string expr)
             {
-                return initialValidationResult;
-            }
-
-            string[] expr = (string[])value;
-
-            foreach (string e in expr) // TODO: naming
-            {
-                int expectedLength = AnyToken.Matches(e).Sum(match => match.Length);
-
-                if (e.Length != expectedLength)
+                if (!HasExpectedLength(expr))
                 {
                     return new ValidationResult("Unrecognized symbol(s) found");
                 }
+
+                return ValidationResult.Success;
             }
 
-            return ValidationResult.Success;
+            return new ValidationResult("Incorrect format");
         }
     }
 }

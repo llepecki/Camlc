@@ -1,6 +1,6 @@
+using Lepecki.Playground.Camlc.Api.Helpers;
 using Lepecki.Playground.Camlc.Api.Models;
 using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Primitives;
@@ -29,15 +29,12 @@ namespace Lepecki.Playground.Camlc.Api.Filters
         {
             if (context.HttpContext.Request.Query.ContainsKey(_paramName))
             {
-                var cache = GetCache(context);
-
-                (ExprResult[] fromCache, string[] notInCache) =
-                    GetExprResultsFromCache(context.HttpContext.Request.Query[_paramName], cache);
+                IMemoryCache cache = GetCache(context);
+                (ExprResult[] fromCache, string[] notInCache) = GetExprResultsFromCache(context.HttpContext.Request.Query[_paramName], cache);
 
                 if (fromCache.Length > 0)
                 {
                     context.HttpContext.Items.Add(_cachedExprResultsKey, fromCache);
-
                     string[] headers = fromCache.Select(result => result.Expr).ToArray();
 
                     if (headers.Length > 0)
@@ -45,8 +42,7 @@ namespace Lepecki.Playground.Camlc.Api.Filters
                         context.HttpContext.Response.Headers.Add("From-Cache", new StringValues(headers));
                     }
 
-                    context.HttpContext.Request.Query = new QueryCollection(
-                        context.HttpContext.Request.Query.ToDictionary(pair => pair.Key, pair => new StringValues(notInCache)));
+                    context.RewriteQueryParam(_paramName, new StringValues(notInCache));
                 }
             }
         }
@@ -74,19 +70,7 @@ namespace Lepecki.Playground.Camlc.Api.Filters
                 {
                     if (context.HttpContext.Items[_cachedExprResultsKey] is ExprResult[] cachedResults)
                     {
-                        var allResults = new ExprResult[cachedResults.Length + exprResults.Length];
-
-                        for (int i = 0; i < cachedResults.Length; i++)
-                        {
-                            allResults[i] = cachedResults[i];
-                        }
-
-                        for (int i = 0; i < exprResults.Length; i++)
-                        {
-                            allResults[i + cachedResults.Length] = exprResults[i];
-                        }
-
-                        objectResult.Value = allResults;
+                        objectResult.Value = Merge(cachedResults, exprResults);
                     }
                 }
             }
@@ -115,6 +99,23 @@ namespace Lepecki.Playground.Camlc.Api.Filters
             }
 
             return (fromCache.ToArray(), notInCache.ToArray());
+        }
+
+        private ExprResult[] Merge(ExprResult[] first, ExprResult[] second)
+        {
+            var allResults = new ExprResult[first.Length + second.Length];
+
+            for (int i = 0; i < first.Length; i++)
+            {
+                allResults[i] = first[i];
+            }
+
+            for (int i = 0; i < second.Length; i++)
+            {
+                allResults[i + first.Length] = second[i];
+            }
+
+            return allResults;
         }
     }
 }

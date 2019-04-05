@@ -10,6 +10,8 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System;
 using System.Reflection;
+using Lepecki.Playground.Camlc.Api.Formatters;
+using Microsoft.AspNetCore.Mvc.Formatters;
 
 namespace Lepecki.Playground.Camlc.Api.Configuration
 {
@@ -39,7 +41,7 @@ namespace Lepecki.Playground.Camlc.Api.Configuration
             options.ApiVersionReader = new HeaderApiVersionReader("Api-Version");
             options.AssumeDefaultVersionWhenUnspecified = true;
             options.DefaultApiVersion = _apiVersion;
-            options.ReportApiVersions = true;
+            options.ReportApiVersions = false;
         }
 
         public void Configure(MvcOptions options)
@@ -50,6 +52,12 @@ namespace Lepecki.Playground.Camlc.Api.Configuration
             }
 
             options.Filters.Add(typeof(TaskCanceledExceptionFilter));
+
+            options.OutputFormatters.RemoveType<StringOutputFormatter>();
+            options.OutputFormatters.RemoveType<StreamOutputFormatter>();
+            options.OutputFormatters.Add(new PlainTextOutputFormatter());
+            options.OutputFormatters.Add(new CsvOutputFormatter());
+            options.OutputFormatters.Add(new XmlOutputFormatter());
         }
 
         public void Configure(RouteOptions options)
@@ -72,6 +80,7 @@ namespace Lepecki.Playground.Camlc.Api.Configuration
             string suffix = _isProduction ? string.Empty : _environmentName;
 
             options.SwaggerEndpoint($"/swagger/{_version}/swagger.json", $"{_name} {_version} {suffix}".Trim());
+            options.DocumentTitle = _name;
             options.RoutePrefix = string.Empty;
         }
     }

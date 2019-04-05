@@ -1,9 +1,7 @@
-using Microsoft.AspNetCore.Http.Internal;
+using Lepecki.Playground.Camlc.Api.Helpers;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Primitives;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace Lepecki.Playground.Camlc.Api.Filters
@@ -24,11 +22,7 @@ namespace Lepecki.Playground.Camlc.Api.Filters
 
         public void OnResourceExecuting(ResourceExecutingContext context)
         {
-            if (context.HttpContext.Request.Query.ContainsKey(_paramName))
-            {
-                context.HttpContext.Request.Query = new QueryCollection(
-                    context.HttpContext.Request.Query.ToDictionary(GetKey, GetValue));
-            }
+            context.RewriteQueryParam(_paramName, NormalizeParamName, NormalizeParamValues);
         }
 
         public void OnResourceExecuted(ResourceExecutedContext context)
@@ -39,36 +33,31 @@ namespace Lepecki.Playground.Camlc.Api.Filters
 
         public bool ToUpperInvariant { get; set; } = true;
 
-        private string GetKey(KeyValuePair<string, StringValues> param)
+        private string NormalizeParamName(string param)
         {
-            return param.Key.Equals(_paramName, StringComparison.OrdinalIgnoreCase) ? _paramName : param.Key;
+            return _paramName;
         }
 
-        private StringValues GetValue(KeyValuePair<string, StringValues> param)
+        private StringValues NormalizeParamValues(StringValues values)
         {
-            if (param.Key.Equals(_paramName, StringComparison.OrdinalIgnoreCase))
+            var normalized = new string[values.Count];
+
+            for (int i = 0; i < normalized.Length; i++)
             {
-                var values = new string[param.Value.Count];
+                normalized[i] = values[i];
 
-                for (int i = 0; i < values.Length; i++)
+                if (RemoveWhiteSpaces)
                 {
-                    values[i] = param.Value[i];
-
-                    if (RemoveWhiteSpaces)
-                    {
-                        values[i] = WhiteSpaceRegex.Replace(values[i], string.Empty);
-                    }
-
-                    if (ToUpperInvariant)
-                    {
-                        values[i] = values[i].ToUpperInvariant();
-                    }
+                    normalized[i] = WhiteSpaceRegex.Replace(normalized[i], string.Empty);
                 }
 
-                return new StringValues(values);
+                if (ToUpperInvariant)
+                {
+                    normalized[i] = normalized[i].ToUpperInvariant();
+                }
             }
 
-            return param.Value;
+            return new StringValues(normalized);
         }
     }
 }
