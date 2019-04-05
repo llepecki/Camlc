@@ -3,6 +3,8 @@ using Lepecki.Playground.Camlc.Engine.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Lepecki.Playground.Camlc.Engine
 {
@@ -23,7 +25,15 @@ namespace Lepecki.Playground.Camlc.Engine
         {
             IReadOnlyCollection<string> infixExpr = _exprSieve.Sieve(expr);
             IReadOnlyCollection<TokenDescriptor> postfixExpr = _infixToPostfixConverter.Convert(infixExpr);
-            IEnumerable<IToken> tokens = postfixExpr.Select(_tokenizer.Create);
+            IEnumerable<Token> tokens = postfixExpr.Select(_tokenizer.Create);
+            return new RpnExpr(tokens);
+        }
+
+        public async Task<RpnExpr> ConvertAsync(string expr, CancellationToken cancellationToken)
+        {
+            IReadOnlyCollection<string> infixExpr = await _exprSieve.SieveAsync(expr, cancellationToken);
+            IReadOnlyCollection<TokenDescriptor> postfixExpr = _infixToPostfixConverter.Convert(infixExpr); // TODO: await
+            IEnumerable<Token> tokens = postfixExpr.Select(_tokenizer.Create); // TODO: await
             return new RpnExpr(tokens);
         }
     }

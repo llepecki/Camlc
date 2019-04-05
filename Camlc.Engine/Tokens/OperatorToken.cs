@@ -1,16 +1,15 @@
-using Lepecki.Playground.Camlc.Engine.Abstractions;
 using System;
 using System.Collections.Generic;
 
 namespace Lepecki.Playground.Camlc.Engine.Tokens
 {
-    public abstract class OperatorToken : IToken
+    public abstract class OperatorToken : Token
     {
         protected abstract int ArgCount { get; }
 
         protected abstract decimal Calculate(decimal[] args);
 
-        public void PushOrCalculate(Stack<decimal> stack)
+        public override void PushOrCalculate(Stack<decimal> stack)
         {
             if (stack == null)
             {

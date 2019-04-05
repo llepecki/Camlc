@@ -1,6 +1,8 @@
 using Lepecki.Playground.Camlc.Engine.Abstractions;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Lepecki.Playground.Camlc.Engine
 {
@@ -19,6 +21,13 @@ namespace Lepecki.Playground.Camlc.Engine
             }
 
             return symbols;
+        }
+
+        public Task<IReadOnlyCollection<string>> SieveAsync(string expr, CancellationToken cancellationToken)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+
+            return Task.FromResult(Sieve(expr));
         }
     }
 }

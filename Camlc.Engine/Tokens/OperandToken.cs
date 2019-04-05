@@ -1,10 +1,9 @@
-using Lepecki.Playground.Camlc.Engine.Abstractions;
 using System;
 using System.Collections.Generic;
 
 namespace Lepecki.Playground.Camlc.Engine.Tokens
 {
-    public class OperandToken : IToken
+    public class OperandToken : Token
     {
         private readonly decimal _value;
 
@@ -13,7 +12,7 @@ namespace Lepecki.Playground.Camlc.Engine.Tokens
             _value = value;
         }
 
-        public void PushOrCalculate(Stack<decimal> stack)
+        public override void PushOrCalculate(Stack<decimal> stack)
         {
             if (stack == null)
             {

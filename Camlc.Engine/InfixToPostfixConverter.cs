@@ -2,6 +2,8 @@ using Lepecki.Playground.Camlc.Engine.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Lepecki.Playground.Camlc.Engine
 {
@@ -22,18 +24,20 @@ namespace Lepecki.Playground.Camlc.Engine
 
             foreach (TokenDescriptor descriptor in descriptors)
             {
-                Advance(descriptor, stack, output);
+                Process(descriptor, stack, output);
             }
 
-            while (stack.Count > 0)
-            {
-                output.Add(stack.Pop());
-            }
-
-            return output.ToArray();
+            return Merge(stack, output);
         }
 
-        private static void Advance(TokenDescriptor descriptor, Stack<TokenDescriptor> stack, IList<TokenDescriptor> output)
+        public Task<IReadOnlyCollection<TokenDescriptor>> ConvertAsync(IEnumerable<string> symbols, CancellationToken cancellationToken)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+
+            return Task.FromResult(Convert(symbols));
+        }
+
+        private static void Process(TokenDescriptor descriptor, Stack<TokenDescriptor> stack, IList<TokenDescriptor> output)
         {
             if (descriptor.IsOperand)
             {
@@ -57,7 +61,7 @@ namespace Lepecki.Playground.Camlc.Engine
                 else if (descriptor.Precedence < stack.Peek().Precedence)
                 {
                     output.Add(stack.Pop());
-                    Advance(descriptor, stack, output);
+                    Process(descriptor, stack, output);
                 }
             }
             else if (descriptor.IsLeftParenthesis)
@@ -74,6 +78,16 @@ namespace Lepecki.Playground.Camlc.Engine
                     descriptor = stack.Pop();
                 }
             }
+        }
+
+        private static IReadOnlyCollection<TokenDescriptor> Merge(Stack<TokenDescriptor> stack, IList<TokenDescriptor> output)
+        {
+            while (stack.Count > 0)
+            {
+                output.Add(stack.Pop());
+            }
+
+            return output.ToArray();
         }
     }
 }
