@@ -14,7 +14,6 @@ namespace Lepecki.Playground.Camlc.Api
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
-                .ConfigureServices(services => services.AddTransient<IStartupOptions, StartupOptions>());
+                .UseStartup<Startup, StartupOptions>();
     }
 }

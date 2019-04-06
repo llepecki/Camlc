@@ -20,7 +20,7 @@ namespace Lepecki.Playground.Camlc.Api.Validation
                         return new ValidationResult("Unrecognized symbol(s) found");
                     }
                 }
-                
+
                 return ValidationResult.Success;
             }
 

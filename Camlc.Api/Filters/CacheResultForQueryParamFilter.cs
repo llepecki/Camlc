@@ -11,12 +11,12 @@ using System.Linq;
 namespace Lepecki.Playground.Camlc.Api.Filters
 {
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class)]
-    public class CacheResultForQueryParamAttribute : Attribute, IResourceFilter, IActionFilter
+    public class CacheResultForQueryParamFilter : Attribute, IResourceFilter, IActionFilter
     {
         private readonly string _paramName;
         private readonly string _cachedExprResultsKey;
 
-        public CacheResultForQueryParamAttribute(string paramName, string cachedExprResultsKey)
+        public CacheResultForQueryParamFilter(string paramName, string cachedExprResultsKey)
         {
             if (string.IsNullOrWhiteSpace(paramName)) throw new ArgumentNullException(nameof(paramName));
             if (string.IsNullOrWhiteSpace(cachedExprResultsKey)) throw new ArgumentNullException(nameof(cachedExprResultsKey));

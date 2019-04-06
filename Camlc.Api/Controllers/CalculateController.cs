@@ -26,8 +26,8 @@ namespace Lepecki.Playground.Camlc.Api.Controllers
 
         [HttpGet]
         [Route("")]
-        [NormalizeQueryParam(ExprQueryParamName)]
-        [CacheResultForQueryParam(ExprQueryParamName, CachedExprResultsKey)]
+        [NormalizeQueryParamFilter(ExprQueryParamName)]
+        [CacheResultForQueryParamFilter(ExprQueryParamName, CachedExprResultsKey)]
         [ProducesResponseType(typeof(ExprResult[]), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
         // TODO: output formatters for xml, json, csv; move this controller to v1.1 (or v2) and create old one with single expr, use versioning

@@ -19,7 +19,7 @@ namespace Lepecki.Playground.Camlc.Api.Formatters
 
         protected override bool CanWriteType(Type type)
         {
-            return type == typeof(ExprResult[]);
+            return type == typeof(ExprResult) || type == typeof(ExprResult[]);
         }
 
         public override async Task WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding selectedEncoding)
