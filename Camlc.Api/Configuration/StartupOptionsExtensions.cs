@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Lepecki.Playground.Camlc.Api.Configuration
+namespace Com.Lepecki.Playground.Camlc.Api.Configuration
 {
     public static class StartupOptionsExtensions
     {

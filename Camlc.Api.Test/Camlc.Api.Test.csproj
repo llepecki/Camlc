@@ -2,8 +2,8 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <IsPackable>false</IsPackable>
-    <AssemblyName>Lepecki.Playground.Camlc.Api.Test</AssemblyName>
-    <RootNamespace>Lepecki.Playground.Camlc.Api.Test</RootNamespace>
+    <AssemblyName>Com.Lepecki.Playground.Camlc.Api.Test</AssemblyName>
+    <RootNamespace>Com.Lepecki.Playground.Camlc.Api.Test</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />

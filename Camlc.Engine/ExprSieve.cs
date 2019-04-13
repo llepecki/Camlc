@@ -1,10 +1,10 @@
-using Lepecki.Playground.Camlc.Engine.Abstractions;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using Com.Lepecki.Playground.Camlc.Engine.Abstractions;
 
-namespace Lepecki.Playground.Camlc.Engine
+namespace Com.Lepecki.Playground.Camlc.Engine
 {
     public class ExprSieve : IExprSieve
     {

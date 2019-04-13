@@ -1,5 +1,4 @@
-using Lepecki.Playground.Camlc.Api.Helpers;
-using Lepecki.Playground.Camlc.Api.Models;
+using Com.Lepecki.Playground.Camlc.Api.Helpers;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
@@ -7,8 +6,9 @@ using Microsoft.Extensions.Primitives;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Com.Lepecki.Playground.Camlc.Api.Models;
 
-namespace Lepecki.Playground.Camlc.Api.Filters
+namespace Com.Lepecki.Playground.Camlc.Api.Filters
 {
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class)]
     public class CacheResultForQueryParamFilter : Attribute, IResourceFilter, IActionFilter

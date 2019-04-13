@@ -1,6 +1,6 @@
-using Lepecki.Playground.Camlc.Engine.Tokens;
+using Com.Lepecki.Playground.Camlc.Engine.Tokens;
 
-namespace Lepecki.Playground.Camlc.Engine.Abstractions
+namespace Com.Lepecki.Playground.Camlc.Engine.Abstractions
 {
     public interface ITokenizer
     {

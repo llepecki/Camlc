@@ -4,7 +4,7 @@ using Microsoft.Extensions.Primitives;
 using System;
 using System.Linq;
 
-namespace Lepecki.Playground.Camlc.Api.Helpers
+namespace Com.Lepecki.Playground.Camlc.Api.Helpers
 {
     public static class HttpContextHelper
     {

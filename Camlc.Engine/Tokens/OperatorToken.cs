@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Lepecki.Playground.Camlc.Engine.Tokens
+namespace Com.Lepecki.Playground.Camlc.Engine.Tokens
 {
     public abstract class OperatorToken : Token
     {

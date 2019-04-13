@@ -1,4 +1,4 @@
-namespace Lepecki.Playground.Camlc.Api.Models
+namespace Com.Lepecki.Playground.Camlc.Api.Models
 {
     public class ExprResult
     {

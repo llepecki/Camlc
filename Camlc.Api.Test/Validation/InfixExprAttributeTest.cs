@@ -1,7 +1,7 @@
-using Lepecki.Playground.Camlc.Api.Validation;
+using Com.Lepecki.Playground.Camlc.Api.Validation;
 using NUnit.Framework;
 
-namespace Lepecki.Playground.Camlc.Api.Test.Validation
+namespace Com.Lepecki.Playground.Camlc.Api.Test.Validation
 {
     [TestFixture(TestOf = typeof(InfixExprAttribute))]
     public class InfixExprAttributeTest

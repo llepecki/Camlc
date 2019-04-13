@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Lepecki.Playground.Camlc.Api.Validation
+namespace Com.Lepecki.Playground.Camlc.Api.Validation
 {
     public class InfixMultiExprAttribute : InfixExprAttributeBase
     {

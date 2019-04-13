@@ -2,12 +2,12 @@ using System;
 using System.Globalization;
 using System.Text;
 using System.Threading.Tasks;
-using Lepecki.Playground.Camlc.Api.Models;
+using Com.Lepecki.Playground.Camlc.Api.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Extensions.Hosting;
 
-namespace Lepecki.Playground.Camlc.Api.Formatters
+namespace Com.Lepecki.Playground.Camlc.Api.Formatters
 {
     public class CsvOutputFormatter : TextOutputFormatter
     {

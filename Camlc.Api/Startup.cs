@@ -1,13 +1,16 @@
-﻿using Lepecki.Playground.Camlc.Api.Configuration;
-using Lepecki.Playground.Camlc.Engine.Module;
+﻿using System;
+using Com.Lepecki.Playground.Camlc.Api.Configuration;
+using Com.Lepecki.Playground.Camlc.Engine.Module;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
+using Microsoft.Extensions.Options;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Lepecki.Playground.Camlc.Api
+namespace Com.Lepecki.Playground.Camlc.Api
 {
     public class Startup
     {
@@ -22,15 +25,17 @@ namespace Lepecki.Playground.Camlc.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc(_startupOptions.Configure).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc(_startupOptions.Configure).SetCompatibilityVersion(CompatibilityVersion.Version_2_2); // TODO: consider AddMvcCore
             services.AddRouting(_startupOptions.Configure);
             services.AddApiVersioning(_startupOptions.Configure);
-            services.AddSwaggerGen(_startupOptions.Configure);
+            services.AddVersionedApiExplorer(_startupOptions.Configure);
+            services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>(); // TODO: maybe don't create configure method but use IConfigureOptions<> ?
+            services.AddSwaggerGen(); // TODO: missing options
             services.AddMemoryCache();
             services.AddEngine();
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApiVersionDescriptionProvider provider)
         {
             if (env.IsDevelopment())
             {
@@ -41,10 +46,10 @@ namespace Lepecki.Playground.Camlc.Api
                 app.UseHsts();
             }
 
-            // app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
             app.UseMvc();
             app.UseSwagger();
-            app.UseSwaggerUI(_startupOptions.Configure);
+            app.UseSwaggerUI(options => _startupOptions.Configure(options, provider));
         }
     }
 }

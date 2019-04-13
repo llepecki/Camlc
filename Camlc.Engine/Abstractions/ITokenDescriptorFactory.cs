@@ -1,4 +1,4 @@
-namespace Lepecki.Playground.Camlc.Engine.Abstractions
+namespace Com.Lepecki.Playground.Camlc.Engine.Abstractions
 {
     public interface ITokenDescriptorFactory
     {

@@ -1,4 +1,3 @@
-using Lepecki.Playground.Camlc.Api.Models;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.AspNetCore.Http;
 using System;
@@ -7,8 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
+using Com.Lepecki.Playground.Camlc.Api.Models;
 
-namespace Lepecki.Playground.Camlc.Api.Formatters
+namespace Com.Lepecki.Playground.Camlc.Api.Formatters
 {
     public class XmlOutputFormatter : TextOutputFormatter
     {

@@ -1,8 +1,8 @@
-using Lepecki.Playground.Camlc.Engine.Abstractions;
 using System;
 using System.Text.RegularExpressions;
+using Com.Lepecki.Playground.Camlc.Engine.Abstractions;
 
-namespace Lepecki.Playground.Camlc.Engine
+namespace Com.Lepecki.Playground.Camlc.Engine
 {
     public class TokenDescriptorFactory : ITokenDescriptorFactory
     {

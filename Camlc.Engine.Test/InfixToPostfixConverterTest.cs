@@ -1,10 +1,10 @@
-using Lepecki.Playground.Camlc.Engine.Abstractions;
 using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Com.Lepecki.Playground.Camlc.Engine.Abstractions;
 
-namespace Lepecki.Playground.Camlc.Engine.Test
+namespace Com.Lepecki.Playground.Camlc.Engine.Test
 {
     [TestFixture(TestOf = typeof(InfixToPostfixConverter))]
     public class InfixToPostfixConverterTest

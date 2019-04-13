@@ -1,10 +1,10 @@
-using Lepecki.Playground.Camlc.Api.Helpers;
+using Com.Lepecki.Playground.Camlc.Api.Helpers;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Primitives;
 using System;
 using System.Text.RegularExpressions;
 
-namespace Lepecki.Playground.Camlc.Api.Filters
+namespace Com.Lepecki.Playground.Camlc.Api.Filters
 {
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class)]
     public class NormalizeQueryParamFilter : Attribute, IResourceFilter

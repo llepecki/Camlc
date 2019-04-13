@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Lepecki.Playground.Camlc.Engine.Abstractions
+namespace Com.Lepecki.Playground.Camlc.Engine.Abstractions
 {
     public interface IExprSieve
     {

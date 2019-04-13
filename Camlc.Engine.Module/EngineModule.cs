@@ -1,7 +1,7 @@
-﻿using Lepecki.Playground.Camlc.Engine.Abstractions;
+﻿using Com.Lepecki.Playground.Camlc.Engine.Abstractions;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Lepecki.Playground.Camlc.Engine.Module
+namespace Com.Lepecki.Playground.Camlc.Engine.Module
 {
     public static class EngineModule
     {

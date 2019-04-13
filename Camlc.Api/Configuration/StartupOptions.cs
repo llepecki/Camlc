@@ -1,19 +1,20 @@
-using Lepecki.Playground.Camlc.Api.Filters;
+using System;
+using System.Reflection;
+using Com.Lepecki.Playground.Camlc.Api.Filters;
+using Com.Lepecki.Playground.Camlc.Api.Formatters;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Swashbuckle.AspNetCore.SwaggerUI;
-using System;
-using System.Reflection;
-using Lepecki.Playground.Camlc.Api.Formatters;
-using Microsoft.AspNetCore.Mvc.Formatters;
 
-namespace Lepecki.Playground.Camlc.Api.Configuration
+namespace Com.Lepecki.Playground.Camlc.Api.Configuration
 {
     public class StartupOptions : IStartupOptions
     {
@@ -38,10 +39,16 @@ namespace Lepecki.Playground.Camlc.Api.Configuration
 
         public void Configure(ApiVersioningOptions options)
         {
-            options.ApiVersionReader = new HeaderApiVersionReader("Api-Version");
             options.AssumeDefaultVersionWhenUnspecified = true;
             options.DefaultApiVersion = _apiVersion;
             options.ReportApiVersions = false;
+            options.RouteConstraintName = "api-version";
+        }
+
+        public void Configure(ApiExplorerOptions options)
+        {
+            options.GroupNameFormat = "'v'VVV";
+            options.SubstituteApiVersionInUrl = true;
         }
 
         public void Configure(MvcOptions options)
@@ -65,21 +72,32 @@ namespace Lepecki.Playground.Camlc.Api.Configuration
             options.LowercaseUrls = true;
         }
 
-        public void Configure(SwaggerGenOptions options)
+        public void Configure(SwaggerGenOptions options, IApiVersionDescriptionProvider apiVersionDescriptionProvider)
         {
-            options.SwaggerDoc(_version, new Info
+            options.OperationFilter<SwaggerDefaultValues>();
+
+            foreach (ApiVersionDescription description in apiVersionDescriptionProvider.ApiVersionDescriptions)
             {
-                Title = _name,
-                Version = _version,
-                Description = _description
-            });
+                options.SwaggerDoc(description.GroupName, new Info
+                {
+                    Title = _name,
+                    Version = description.ApiVersion.ToString(),
+                    Description = description.IsDeprecated ? $"{_description}. This API version has been deprecated." : _description
+                });
+            }
         }
 
-        public void Configure(SwaggerUIOptions options)
+        public void Configure(SwaggerUIOptions options, IApiVersionDescriptionProvider apiVersionDescriptionProvider)
         {
             string suffix = _isProduction ? string.Empty : _environmentName;
 
-            options.SwaggerEndpoint($"/swagger/{_version}/swagger.json", $"{_name} {_version} {suffix}".Trim());
+            foreach (ApiVersionDescription description in apiVersionDescriptionProvider.ApiVersionDescriptions)
+            {
+                options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", $"{_name} {description.GroupName.ToUpperInvariant()} {suffix}".Trim());
+            }
+
+            // options.SwaggerEndpoint($"/swagger/{_version}/swagger.json", $"{_name} {_version} {suffix}".Trim()); TODO: move above
+
             options.DocumentTitle = _name;
             options.RoutePrefix = string.Empty;
         }

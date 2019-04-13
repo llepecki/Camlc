@@ -1,17 +1,17 @@
-﻿using Lepecki.Playground.Camlc.Api.Filters;
-using Lepecki.Playground.Camlc.Api.Models;
-using Lepecki.Playground.Camlc.Api.Validation;
-using Lepecki.Playground.Camlc.Engine.Abstractions;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Com.Lepecki.Playground.Camlc.Api.Filters;
+using Com.Lepecki.Playground.Camlc.Api.Models;
+using Com.Lepecki.Playground.Camlc.Api.Validation;
+using Com.Lepecki.Playground.Camlc.Engine.Abstractions;
 
-namespace Lepecki.Playground.Camlc.Api.Controllers
+namespace Com.Lepecki.Playground.Camlc.Api.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api")]
     public class CalculateController : ControllerBase
     {
         private const string ExprQueryParamName = "expr";
@@ -24,17 +24,32 @@ namespace Lepecki.Playground.Camlc.Api.Controllers
             _calc = calc ?? throw new ArgumentNullException(nameof(calc));
         }
 
+
         [HttpGet]
-        [Route("")]
+        [ApiVersion("1.0")]
+        [Route("v{version:api-version}/[action]")]
+        [NormalizeQueryParamFilter(ExprQueryParamName)]
+        [CacheResultForQueryParamFilter(ExprQueryParamName, CachedExprResultsKey)]
+        [ProducesResponseType(typeof(ExprResult), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        public ActionResult<ExprResult> Calculate([FromQuery, InfixExpr] string expr, CancellationToken cancellationToken)
+        {
+            return new ExprResult
+            {
+                Expr = expr,
+                Result = _calc.Calculate(expr)
+            };
+        }
+
+        [HttpGet]
+        [ApiVersion("2.0")]
+        [Route("v{version:api-version}/[action]")]
         [NormalizeQueryParamFilter(ExprQueryParamName)]
         [CacheResultForQueryParamFilter(ExprQueryParamName, CachedExprResultsKey)]
         [ProducesResponseType(typeof(ExprResult[]), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
-        // TODO: output formatters for xml, json, csv; move this controller to v1.1 (or v2) and create old one with single expr, use versioning
         public async Task<ActionResult<ExprResult[]>> Calculate([FromQuery, InfixMultiExpr] string[] expr, CancellationToken cancellationToken)
         {
-            // TODO: human readable output (2ADDNEG3) -> (2 ADD NEG 3)
-
             var calculations = new Task<decimal>[expr.Length];
 
             for (int i = 0; i < expr.Length; i++)
