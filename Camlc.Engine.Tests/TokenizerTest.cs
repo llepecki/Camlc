@@ -1,7 +1,7 @@
-using NUnit.Framework;
 using System;
 using Com.Lepecki.Playground.Camlc.Engine.Abstractions;
 using Com.Lepecki.Playground.Camlc.Engine.Tokens;
+using NUnit.Framework;
 
 namespace Com.Lepecki.Playground.Camlc.Engine.Test
 {

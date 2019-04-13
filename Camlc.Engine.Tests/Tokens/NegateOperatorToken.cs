@@ -1,6 +1,6 @@
-using NUnit.Framework;
 using System.Collections.Generic;
 using Com.Lepecki.Playground.Camlc.Engine.Tokens;
+using NUnit.Framework;
 
 namespace Com.Lepecki.Playground.Camlc.Engine.Test.Tokens
 {
