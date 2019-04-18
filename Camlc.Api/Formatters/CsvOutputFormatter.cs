@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Com.Lepecki.Playground.Camlc.Api.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Formatters;
-using Microsoft.Extensions.Hosting;
 
 namespace Com.Lepecki.Playground.Camlc.Api.Formatters
 {

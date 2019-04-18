@@ -1,5 +1,4 @@
-﻿using Com.Lepecki.Playground.Camlc.Api.Configuration;
-using Microsoft.AspNetCore;
+﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
 namespace Com.Lepecki.Playground.Camlc.Api
@@ -13,6 +12,6 @@ namespace Com.Lepecki.Playground.Camlc.Api
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup, StartupOptions>();
+                .UseStartup<Startup>();
     }
 }
