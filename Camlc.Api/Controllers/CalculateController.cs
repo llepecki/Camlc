@@ -24,7 +24,6 @@ namespace Com.Lepecki.Playground.Camlc.Api.Controllers
             _calc = calc ?? throw new ArgumentNullException(nameof(calc));
         }
 
-
         [HttpGet]
         [ApiVersion("1")]
         [Route("v{version:api-version}/[action]")]
