@@ -23,7 +23,7 @@ namespace Com.Lepecki.Playground.Camlc.Api.Configuration
 
         public void Configure(SwaggerGenOptions options)
         {
-            foreach (var description in _apiVersionDescriptionProvider.ApiVersionDescriptions)
+            foreach (ApiVersionDescription description in _apiVersionDescriptionProvider.ApiVersionDescriptions)
             {
                 options.SwaggerDoc(description.GroupName, CreateInfoForApiVersion(description));
             }
@@ -31,33 +31,26 @@ namespace Com.Lepecki.Playground.Camlc.Api.Configuration
 
         public void Configure(SwaggerUIOptions options)
         {
-            string suffix = _environment.IsProduction() ? string.Empty : _environment.EnvironmentName;
-
             foreach (ApiVersionDescription description in _apiVersionDescriptionProvider.ApiVersionDescriptions)
             {
-                options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", $"[name] {description.GroupName.ToUpperInvariant()} {suffix}".Trim());
+                string nameSuffix = description.IsDeprecated ? " (deprecated)" : string.Empty;
+                options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", $"{description.GroupName}{nameSuffix}");
             }
 
-            options.DocumentTitle = "[document title]";
+            options.DocumentTitle = "Camlc API";
             options.RoutePrefix = string.Empty;
         }
 
-        static Info CreateInfoForApiVersion(ApiVersionDescription description)
+        private Info CreateInfoForApiVersion(ApiVersionDescription description)
         {
+            string titleSuffix = _environment.IsProduction() ? string.Empty : $" - {_environment.EnvironmentName}";
+
             var info = new Info
             {
-                Title = "Sample API",
-                Version = description.ApiVersion.ToString(),
-                Description = "A sample application with Swagger, Swashbuckle, and API versioning.",
-                Contact = new Contact { Name = "Bill Mei", Email = "bill.mei@somewhere.com" },
-                TermsOfService = "Shareware",
-                License = new License { Name = "MIT", Url = "https://opensource.org/licenses/MIT" }
+                Title = $"Camlc API{titleSuffix}",
+                Version = description.ApiVersion.ToString("'v'V"),
+                Description = "Reverse Polish Notation powered calculator exposed via ASP.NET Core Web API"
             };
-
-            if (description.IsDeprecated)
-            {
-                info.Description += " This API version has been deprecated.";
-            }
 
             return info;
         }

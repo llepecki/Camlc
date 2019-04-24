@@ -7,7 +7,7 @@ namespace Com.Lepecki.Playground.Camlc.Api.Configuration
     {
         public void Configure(ApiExplorerOptions options)
         {
-            options.GroupNameFormat = "V";
+            options.GroupNameFormat = "'v'V";
             options.SubstituteApiVersionInUrl = true;
         }
     }

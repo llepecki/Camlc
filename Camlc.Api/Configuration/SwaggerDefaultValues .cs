@@ -1,7 +1,7 @@
-using System.Linq;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using System.Linq;
 
 namespace Com.Lepecki.Playground.Camlc.Api.Configuration
 {
@@ -20,7 +20,7 @@ namespace Com.Lepecki.Playground.Camlc.Api.Configuration
 
             foreach (var parameter in operation.Parameters.OfType<NonBodyParameter>())
             {
-                var description = apiDescription.ParameterDescriptions.First(p => p.Name == parameter.Name);
+                var description = apiDescription.ParameterDescriptions.First(paramDesc => paramDesc.Name == parameter.Name);
 
                 if (parameter.Description == null)
                 {

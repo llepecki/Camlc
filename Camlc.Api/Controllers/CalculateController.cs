@@ -25,7 +25,7 @@ namespace Com.Lepecki.Playground.Camlc.Api.Controllers
         }
 
         [HttpGet]
-        [ApiVersion("1")]
+        [ApiVersion("1.0", Deprecated = true)]
         [Route("v{version:api-version}/[action]")]
         [NormalizeQueryParamFilter(ExprQueryParamName)]
         [CacheResultForQueryParamFilter(ExprQueryParamName, CachedExprResultsKey)]
@@ -41,7 +41,7 @@ namespace Com.Lepecki.Playground.Camlc.Api.Controllers
         }
 
         [HttpGet]
-        [ApiVersion("2")]
+        [ApiVersion("2.0")]
         [Route("v{version:api-version}/[action]")]
         [NormalizeQueryParamFilter(ExprQueryParamName)]
         [CacheResultForQueryParamFilter(ExprQueryParamName, CachedExprResultsKey)]

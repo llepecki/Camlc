@@ -6,12 +6,12 @@ namespace Com.Lepecki.Playground.Camlc.Api.Configuration
     {
         public static IServiceCollection AddStartupOptions(this IServiceCollection serviceCollection)
         {
-            serviceCollection.ConfigureOptions<ApiVersioningOptionsConfigurator>();
-            serviceCollection.ConfigureOptions<MvcOptionsConfigurator>();
-            serviceCollection.ConfigureOptions<RouteOptionsConfigurator>();
-            serviceCollection.ConfigureOptions<SwaggerOptionsConfigurator>();
-
-            return serviceCollection;
+            return serviceCollection
+                .ConfigureOptions<ApiExplorerOptionsConfigurator>()
+                .ConfigureOptions<ApiVersioningOptionsConfigurator>()
+                .ConfigureOptions<MvcOptionsConfigurator>()
+                .ConfigureOptions<RouteOptionsConfigurator>()
+                .ConfigureOptions<SwaggerOptionsConfigurator>();
         }
     }
 }
