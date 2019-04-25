@@ -1,9 +1,9 @@
+using Com.Lepecki.Playground.Camlc.Engine.Abstractions;
+using Com.Lepecki.Playground.Camlc.Engine.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Com.Lepecki.Playground.Camlc.Engine.Abstractions;
-using Com.Lepecki.Playground.Camlc.Engine.Tokens;
 
 namespace Com.Lepecki.Playground.Camlc.Engine
 {
@@ -33,6 +33,8 @@ namespace Com.Lepecki.Playground.Camlc.Engine
 
         public async Task<decimal> CalculateAsync(string expr, CancellationToken cancellationToken)
         {
+            cancellationToken.ThrowIfCancellationRequested();
+
             RpnExpr rpnExpr = await _toRpnConverter.ConvertAsync(expr, cancellationToken);
 
             var stack = new Stack<decimal>();

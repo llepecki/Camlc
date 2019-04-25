@@ -45,7 +45,7 @@ namespace Com.Lepecki.Playground.Camlc.Api
             app.UseHttpsRedirection();
             app.UseMvc();
             app.UseSwagger();
-            app.UseSwaggerUI(); //options => _startupOptions.Configure(options, provider));
+            app.UseSwaggerUI();
         }
     }
 }

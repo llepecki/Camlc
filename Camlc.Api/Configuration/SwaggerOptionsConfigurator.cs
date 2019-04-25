@@ -45,14 +45,12 @@ namespace Com.Lepecki.Playground.Camlc.Api.Configuration
         {
             string titleSuffix = _environment.IsProduction() ? string.Empty : $" - {_environment.EnvironmentName}";
 
-            var info = new Info
+            return new Info
             {
                 Title = $"Camlc API{titleSuffix}",
                 Version = description.ApiVersion.ToString("'v'V"),
                 Description = "Reverse Polish Notation powered calculator exposed via ASP.NET Core Web API"
             };
-
-            return info;
         }
     }
 }

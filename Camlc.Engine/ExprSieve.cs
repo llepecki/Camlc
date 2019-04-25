@@ -1,8 +1,8 @@
+using Com.Lepecki.Playground.Camlc.Engine.Abstractions;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using Com.Lepecki.Playground.Camlc.Engine.Abstractions;
 
 namespace Com.Lepecki.Playground.Camlc.Engine
 {

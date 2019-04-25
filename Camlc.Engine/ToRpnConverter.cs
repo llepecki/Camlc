@@ -32,8 +32,8 @@ namespace Com.Lepecki.Playground.Camlc.Engine
         public async Task<RpnExpr> ConvertAsync(string expr, CancellationToken cancellationToken)
         {
             IReadOnlyCollection<string> infixExpr = await _exprSieve.SieveAsync(expr, cancellationToken);
-            IReadOnlyCollection<TokenDescriptor> postfixExpr = _infixToPostfixConverter.Convert(infixExpr); // TODO: await
-            IEnumerable<Token> tokens = postfixExpr.Select(_tokenizer.Create); // TODO: await
+            IReadOnlyCollection<TokenDescriptor> postfixExpr = await _infixToPostfixConverter.ConvertAsync(infixExpr, cancellationToken);
+            IEnumerable<Token> tokens = postfixExpr.Select(_tokenizer.Create);
             return new RpnExpr(tokens);
         }
     }

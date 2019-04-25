@@ -1,12 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Com.Lepecki.Playground.Camlc.Api.Filters;
+using Com.Lepecki.Playground.Camlc.Api.Models;
+using Com.Lepecki.Playground.Camlc.Api.Validation;
+using Com.Lepecki.Playground.Camlc.Engine.Abstractions;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Com.Lepecki.Playground.Camlc.Api.Filters;
-using Com.Lepecki.Playground.Camlc.Api.Models;
-using Com.Lepecki.Playground.Camlc.Api.Validation;
-using Com.Lepecki.Playground.Camlc.Engine.Abstractions;
 
 namespace Com.Lepecki.Playground.Camlc.Api.Controllers
 {
@@ -25,7 +25,7 @@ namespace Com.Lepecki.Playground.Camlc.Api.Controllers
         }
 
         [HttpGet]
-        [ApiVersion("1.0", Deprecated = true)]
+        [ApiVersion("1", Deprecated = true)]
         [Route("v{version:api-version}/[action]")]
         [NormalizeQueryParamFilter(ExprQueryParamName)]
         [CacheResultForQueryParamFilter(ExprQueryParamName, CachedExprResultsKey)]
@@ -41,7 +41,7 @@ namespace Com.Lepecki.Playground.Camlc.Api.Controllers
         }
 
         [HttpGet]
-        [ApiVersion("2.0")]
+        [ApiVersion("2")]
         [Route("v{version:api-version}/[action]")]
         [NormalizeQueryParamFilter(ExprQueryParamName)]
         [CacheResultForQueryParamFilter(ExprQueryParamName, CachedExprResultsKey)]
