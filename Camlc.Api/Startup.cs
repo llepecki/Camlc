@@ -1,36 +1,37 @@
-﻿using Lepecki.Playground.Camlc.Api.Configuration;
-using Lepecki.Playground.Camlc.Engine.Module;
+﻿using System;
+using Com.Lepecki.Playground.Camlc.Api.Configuration;
+using Com.Lepecki.Playground.Camlc.Engine.Module;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 
-namespace Lepecki.Playground.Camlc.Api
+namespace Com.Lepecki.Playground.Camlc.Api
 {
     public class Startup
     {
-        private readonly IStartupOptions _startupOptions;
         private readonly IConfiguration _configuration;
 
-        public Startup(IStartupOptions startupOptions, IConfiguration configuration)
+        public Startup(IConfiguration configuration)
         {
-            _startupOptions = startupOptions ?? throw new ArgumentNullException(nameof(startupOptions));
             _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
         }
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc(_startupOptions.Configure).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            services.AddRouting(_startupOptions.Configure);
-            services.AddApiVersioning(_startupOptions.Configure);
-            services.AddSwaggerGen(_startupOptions.Configure);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddRouting();
+            services.AddApiVersioning();
+            services.AddVersionedApiExplorer();
+            services.AddSwaggerGen();
+            services.AddStartupOptions();
             services.AddMemoryCache();
             services.AddEngine();
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApiVersionDescriptionProvider provider)
         {
             if (env.IsDevelopment())
             {
@@ -41,10 +42,10 @@ namespace Lepecki.Playground.Camlc.Api
                 app.UseHsts();
             }
 
-            // app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
             app.UseMvc();
             app.UseSwagger();
-            app.UseSwaggerUI(_startupOptions.Configure);
+            app.UseSwaggerUI();
         }
     }
 }

@@ -1,11 +1,11 @@
-using Lepecki.Playground.Camlc.Engine.Abstractions;
+using Com.Lepecki.Playground.Camlc.Engine.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Lepecki.Playground.Camlc.Engine
+namespace Com.Lepecki.Playground.Camlc.Engine
 {
     public class InfixToPostfixConverter : IInfixToPostfixConverter
     {

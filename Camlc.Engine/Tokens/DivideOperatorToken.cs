@@ -1,4 +1,4 @@
-namespace Lepecki.Playground.Camlc.Engine.Tokens
+namespace Com.Lepecki.Playground.Camlc.Engine.Tokens
 {
     public class DivideOperatorToken : BinaryOperatorToken
     {

@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace Lepecki.Playground.Camlc.Api.Validation
+namespace Com.Lepecki.Playground.Camlc.Api.Validation
 {
     public abstract class InfixExprAttributeBase : RequiredAttribute
     {

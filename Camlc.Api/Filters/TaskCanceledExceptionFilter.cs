@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System.Threading.Tasks;
 
-namespace Lepecki.Playground.Camlc.Api.Filters
+namespace Com.Lepecki.Playground.Camlc.Api.Filters
 {
     public class TaskCanceledExceptionFilter : IExceptionFilter
     {

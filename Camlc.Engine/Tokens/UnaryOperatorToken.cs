@@ -1,6 +1,6 @@
 using System;
 
-namespace Lepecki.Playground.Camlc.Engine.Tokens
+namespace Com.Lepecki.Playground.Camlc.Engine.Tokens
 {
     public abstract class UnaryOperatorToken : OperatorToken
     {

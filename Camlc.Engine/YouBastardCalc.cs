@@ -1,11 +1,11 @@
-using Lepecki.Playground.Camlc.Engine.Abstractions;
-using Lepecki.Playground.Camlc.Engine.Tokens;
+using Com.Lepecki.Playground.Camlc.Engine.Abstractions;
+using Com.Lepecki.Playground.Camlc.Engine.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Lepecki.Playground.Camlc.Engine
+namespace Com.Lepecki.Playground.Camlc.Engine
 {
     // Etymology of this class' name can by found in "Pyramids" by Terry Pratchett.
     public class YouBastardCalc : ICalc
@@ -33,6 +33,8 @@ namespace Lepecki.Playground.Camlc.Engine
 
         public async Task<decimal> CalculateAsync(string expr, CancellationToken cancellationToken)
         {
+            cancellationToken.ThrowIfCancellationRequested();
+
             RpnExpr rpnExpr = await _toRpnConverter.ConvertAsync(expr, cancellationToken);
 
             var stack = new Stack<decimal>();

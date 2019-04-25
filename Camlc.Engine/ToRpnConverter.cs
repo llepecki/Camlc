@@ -1,12 +1,12 @@
-using Lepecki.Playground.Camlc.Engine.Abstractions;
-using Lepecki.Playground.Camlc.Engine.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Com.Lepecki.Playground.Camlc.Engine.Abstractions;
+using Com.Lepecki.Playground.Camlc.Engine.Tokens;
 
-namespace Lepecki.Playground.Camlc.Engine
+namespace Com.Lepecki.Playground.Camlc.Engine
 {
     public class ToRpnConverter : IToRpnConverter
     {
@@ -32,8 +32,8 @@ namespace Lepecki.Playground.Camlc.Engine
         public async Task<RpnExpr> ConvertAsync(string expr, CancellationToken cancellationToken)
         {
             IReadOnlyCollection<string> infixExpr = await _exprSieve.SieveAsync(expr, cancellationToken);
-            IReadOnlyCollection<TokenDescriptor> postfixExpr = _infixToPostfixConverter.Convert(infixExpr); // TODO: await
-            IEnumerable<Token> tokens = postfixExpr.Select(_tokenizer.Create); // TODO: await
+            IReadOnlyCollection<TokenDescriptor> postfixExpr = await _infixToPostfixConverter.ConvertAsync(infixExpr, cancellationToken);
+            IEnumerable<Token> tokens = postfixExpr.Select(_tokenizer.Create);
             return new RpnExpr(tokens);
         }
     }

@@ -1,9 +1,9 @@
-using Lepecki.Playground.Camlc.Engine.Abstractions;
-using Lepecki.Playground.Camlc.Engine.Tokens;
-using NUnit.Framework;
 using System;
+using Com.Lepecki.Playground.Camlc.Engine.Abstractions;
+using Com.Lepecki.Playground.Camlc.Engine.Tokens;
+using NUnit.Framework;
 
-namespace Lepecki.Playground.Camlc.Engine.Test
+namespace Com.Lepecki.Playground.Camlc.Engine.Test
 {
     [TestFixture(TestOf = typeof(Tokenizer))]
     public class TokenizerTest

@@ -1,9 +1,9 @@
-using Lepecki.Playground.Camlc.Engine.Abstractions;
-using Lepecki.Playground.Camlc.Engine.Tokens;
 using System;
 using System.Globalization;
+using Com.Lepecki.Playground.Camlc.Engine.Abstractions;
+using Com.Lepecki.Playground.Camlc.Engine.Tokens;
 
-namespace Lepecki.Playground.Camlc.Engine
+namespace Com.Lepecki.Playground.Camlc.Engine
 {
     public class Tokenizer : ITokenizer
     {

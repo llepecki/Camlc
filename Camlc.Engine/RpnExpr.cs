@@ -1,11 +1,10 @@
-using Lepecki.Playground.Camlc.Engine.Tokens;
+using Com.Lepecki.Playground.Camlc.Engine.Tokens;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Lepecki.Playground.Camlc.Engine.Abstractions;
 
-namespace Lepecki.Playground.Camlc.Engine
+namespace Com.Lepecki.Playground.Camlc.Engine
 {
     public class RpnExpr : IEnumerable<Token>
     {

@@ -1,19 +1,19 @@
-using Lepecki.Playground.Camlc.Api.Helpers;
+using Com.Lepecki.Playground.Camlc.Api.Helpers;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Primitives;
 using System;
 using System.Text.RegularExpressions;
 
-namespace Lepecki.Playground.Camlc.Api.Filters
+namespace Com.Lepecki.Playground.Camlc.Api.Filters
 {
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class)]
-    public class NormalizeQueryParamAttribute : Attribute, IResourceFilter
+    public class NormalizeQueryParamFilter : Attribute, IResourceFilter
     {
         private static readonly Regex WhiteSpaceRegex = new Regex(@"\s+");
 
         private readonly string _paramName;
 
-        public NormalizeQueryParamAttribute(string paramName)
+        public NormalizeQueryParamFilter(string paramName)
         {
             if (string.IsNullOrWhiteSpace(paramName)) throw new ArgumentNullException(nameof(paramName));
 

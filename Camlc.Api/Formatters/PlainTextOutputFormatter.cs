@@ -2,11 +2,11 @@ using System;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Lepecki.Playground.Camlc.Api.Models;
+using Com.Lepecki.Playground.Camlc.Api.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Formatters;
 
-namespace Lepecki.Playground.Camlc.Api.Formatters
+namespace Com.Lepecki.Playground.Camlc.Api.Formatters
 {
     public class PlainTextOutputFormatter : StringOutputFormatter
     {
@@ -19,7 +19,7 @@ namespace Lepecki.Playground.Camlc.Api.Formatters
 
         protected override bool CanWriteType(Type type)
         {
-            return type == typeof(ExprResult[]);
+            return type == typeof(ExprResult) || type == typeof(ExprResult[]);
         }
 
         public override async Task WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding selectedEncoding)

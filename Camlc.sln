@@ -7,11 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Camlc.Api", "Camlc.Api\Caml
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Camlc.Engine", "Camlc.Engine\Camlc.Engine.csproj", "{0253BA4D-AB53-44ED-8934-84666BAEA91A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Camlc.Engine.Test", "Camlc.Engine.Test\Camlc.Engine.Test.csproj", "{E43E33F2-AEC8-4281-902A-529539807BD8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Camlc.Engine.Tests", "Camlc.Engine.Tests\Camlc.Engine.Tests.csproj", "{E43E33F2-AEC8-4281-902A-529539807BD8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Camlc.Engine.Module", "Camlc.Engine.Module\Camlc.Engine.Module.csproj", "{5DD91C45-3FCE-4BB4-B562-1E5CAB11786F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Camlc.Api.Test", "Camlc.Api.Test\Camlc.Api.Test.csproj", "{5F4EBE66-1D6F-48E8-8973-38664429485E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Camlc.Api.Tests", "Camlc.Api.Tests\Camlc.Api.Tests.csproj", "{5F4EBE66-1D6F-48E8-8973-38664429485E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

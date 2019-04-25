@@ -1,7 +1,7 @@
-using Lepecki.Playground.Camlc.Engine.Abstractions;
+using Com.Lepecki.Playground.Camlc.Engine.Abstractions;
 using NUnit.Framework;
 
-namespace Lepecki.Playground.Camlc.Engine.Test
+namespace Com.Lepecki.Playground.Camlc.Engine.Test
 {
     [TestFixture(TestOf = typeof(TokenDescriptorFactory))]
     public class TokenizerDescriptorFactoryTest

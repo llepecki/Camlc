@@ -1,7 +1,7 @@
 using System;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace Lepecki.Playground.Camlc.Api.Filters
+namespace Com.Lepecki.Playground.Camlc.Api.Filters
 {
     public class IncludeEnvironmentHeaderFilter : IResourceFilter
     {

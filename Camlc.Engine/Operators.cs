@@ -1,4 +1,4 @@
-namespace Lepecki.Playground.Camlc.Engine
+namespace Com.Lepecki.Playground.Camlc.Engine
 {
     public static class Operators
     {

@@ -1,9 +1,9 @@
-using Lepecki.Playground.Camlc.Engine.Abstractions;
-using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
+using Com.Lepecki.Playground.Camlc.Engine.Abstractions;
+using NUnit.Framework;
 
-namespace Lepecki.Playground.Camlc.Engine.Test
+namespace Com.Lepecki.Playground.Camlc.Engine.Test
 {
     [TestFixture(TestOf = typeof(ExprSieve))]
     public class ExprSieveTest
